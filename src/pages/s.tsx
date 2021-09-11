@@ -1,12 +1,12 @@
-import MathComponent from 'components/math.component'
-import React from 'react'
+import { Box } from '@material-ui/core';
+import MathContainer from 'components/mathContainer.component';
 
 const SPage = () => {
   return (
-    <div>
-      <MathComponent numberRange={20} />
-    </div>
-  )
+    <Box>
+      <MathContainer numberRange={20} />
+    </Box>
+  );
 }
 
 export default SPage;

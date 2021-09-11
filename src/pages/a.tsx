@@ -1,11 +1,11 @@
-import MathComponent from 'components/math.component'
-import React from 'react'
+import { Box } from '@material-ui/core';
+import MathContainer from 'components/mathContainer.component';
 
 const APage = () => {
   return (
-    <div>
-      <MathComponent numberRange={10000} />
-    </div>
+    <Box>
+      <MathContainer numberRange={10000} />
+    </Box>
   )
 }
 

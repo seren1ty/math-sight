@@ -3,11 +3,12 @@ import { MathQuestion, Operation } from "model/mathQuestion";
 import React from "react";
 import styled from "styled-components";
 
-type MathProps = {
+type MathQuestionsProps = {
   numberRange: number;
+  operationType: Operation;
 }
 
-const MathComponent = (props: MathProps) => {
+const MathQuestions = ({ numberRange, operationType }: MathQuestionsProps) => {
 
   const [questions, setQuestions] = React.useState<MathQuestion[]>([]);
   const [answers, setAnswers] = React.useState<number[]>([]);
@@ -28,15 +29,15 @@ const MathComponent = (props: MathProps) => {
     const newQuestions: MathQuestion[] = [];
 
     for (let idx = 0; idx < 10; idx++) {
-      const numA = Math.floor(Math.random() * props.numberRange);
-      const numB = Math.floor(Math.random() * props.numberRange);
+      const numA = Math.floor(Math.random() * numberRange);
+      const numB = Math.floor(Math.random() * numberRange);
 
-      const question = new MathQuestion(idx, numA, numB, Operation.ADD);
+      const question = new MathQuestion(idx, numA, numB, operationType);
       newQuestions.push(question);
     }
 
     setQuestions(newQuestions);
-  }, []);
+  }, [numberRange, operationType]);
 
   const getOperationIcon = React.useCallback((operation: Operation) => {
     switch(operation) {
@@ -71,10 +72,10 @@ const MathComponent = (props: MathProps) => {
 
   React.useEffect(() => {
     generateQuestions();
-  }, [])
+  }, [operationType]);
 
   return (
-    <Box display="flex" marginX={10} marginY={10}>
+    <Box display="flex" marginX={5} marginY={2}>
       <Box flexDirection="column">
       {
         questions.map((question) => (
@@ -110,7 +111,7 @@ const MathComponent = (props: MathProps) => {
           variant="contained"
           color="primary"
           onClick={() => setShowResults(true)}
-          /* disabled={answers.length < questions.length} */
+          disabled={answers.length < questions.length}
         >
           Check Answers
         </StyledCheckAnswers>
@@ -123,7 +124,7 @@ const MathComponent = (props: MathProps) => {
   );
 };
 
-export default MathComponent;
+export default MathQuestions;
 
 const StyledAnswerInput = styled.input`
   width: 80px;
