@@ -3,7 +3,11 @@ import { MathQuestion, Operation } from "model/mathQuestion";
 import React from "react";
 import styled from "styled-components";
 
-const MathComponent = () => {
+type MathProps = {
+  numberRange: number;
+}
+
+const MathComponent = (props: MathProps) => {
 
   const [questions, setQuestions] = React.useState<MathQuestion[]>([]);
   const [answers, setAnswers] = React.useState<number[]>([]);
@@ -24,8 +28,8 @@ const MathComponent = () => {
     const newQuestions: MathQuestion[] = [];
 
     for (let idx = 0; idx < 10; idx++) {
-      const numA = Math.floor(Math.random() * 10);
-      const numB = Math.floor(Math.random() * 10);
+      const numA = Math.floor(Math.random() * props.numberRange);
+      const numB = Math.floor(Math.random() * props.numberRange);
 
       const question = new MathQuestion(idx, numA, numB, Operation.ADD);
       newQuestions.push(question);
