@@ -69,12 +69,16 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
     setAnswers(newAnswers);
   }, [answers]);
 
-  const generateQuestions = React.useCallback(async () => {
+  const resetFields = React.useCallback(() => {
     setQuestions([]);
     setAnswers([]);
     setShowResults(false);
     setHighScore(readHighScore());
     setCurrentScore(readCurrentScore());
+  }, [setQuestions, setAnswers, setShowResults, setHighScore, readHighScore, setCurrentScore, readCurrentScore]);
+
+  const generateQuestions = React.useCallback(() => {
+    resetFields();
 
     const newQuestions: MathQuestion[] = [];
 
@@ -129,7 +133,7 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
     }
 
     setQuestions(newQuestions);
-  }, [numberRangeAM, numberRangeMD, operationType, readHighScore, readCurrentScore]);
+  }, [numberRangeAM, numberRangeMD, operationType, resetFields]);
 
   const getOperationIcon = React.useCallback((operation: Operation) => {
     switch(operation) {
@@ -148,6 +152,11 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
     return questionId === 0 || questionId < answers.length + 1;
   }, [answers]);
 
+  const readAnswer = React.useCallback((questionId: number) => {
+    const answer = answers[questionId];
+    return answer || "";
+  }, [answers]);
+
   const checkAnswer = React.useCallback((question: MathQuestion) => {
     return Number(answers[question.id]) === Number(question.getResult());
   }, [answers]);
@@ -155,7 +164,7 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
   const calculateCorrectAnswers = React.useCallback(() => {
     const correctlyAnsweredQuestions = questions.filter((question) => checkAnswer(question));
     return correctlyAnsweredQuestions.length;
-  }, [showResults, questions, checkAnswer]);
+  }, [questions, checkAnswer]);
 
   const checkAnswers = React.useCallback(() => {
     const correctlyAnsweredQuestions = calculateCorrectAnswers();
@@ -188,7 +197,7 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
             </Box>
             <StyledAnswerInput
               type="number"
-              value={answers[question.id]}
+              value={readAnswer(question.id)}
               onChange={(e) => handleChangeAnswer(question.id, e.target.value)}
               disabled={!isAnswerEnabled(question.id)}
             />
