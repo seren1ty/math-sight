@@ -185,7 +185,7 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
   }, [operationType, generateQuestions]);
 
   return (
-    <Box display="flex" marginX={5} marginY={2}>
+    <Box display="flex" marginX={5}>
       <Box flexDirection="column">
       {
         questions.map((question) => (
@@ -201,22 +201,22 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
               onChange={(e) => handleChangeAnswer(question.id, e.target.value)}
               disabled={!isAnswerEnabled(question.id)}
             />
+            <StyledResult
+              width="100px"
+              pl={3}
+              lineHeight="30px"
+              correct={checkAnswer(question)}
+            >
             {
               showResults &&
-              <StyledResult
-                width="100px"
-                pl={3}
-                lineHeight="30px"
-                correct={checkAnswer(question)}
-              >
-                {question.getResult()}
-              </StyledResult>
+              <Box>{question.getResult()}</Box>
             }
+            </StyledResult>
           </Box>
         ))
       }
       </Box>
-      <Box flexDirection="column" margin="100px 0 0 100px">
+      <Box flexDirection="column" margin="80px 0 0 50px">
         <StyledNewQuestions
             variant="contained"
             onClick={() => generateQuestions()}

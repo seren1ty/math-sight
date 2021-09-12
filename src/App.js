@@ -1,6 +1,7 @@
-import APage from 'pages/a';
-import SPage from 'pages/s';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import APage from "pages/a";
+import SPage from "pages/s";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import "./App.css"
 
 function App() {
   return (
