@@ -4,11 +4,12 @@ import React from "react";
 import styled from "styled-components";
 
 type MathQuestionsProps = {
-  numberRange: number;
+  numberRangeAM: number;
+  numberRangeMD: number;
   operationType: Operation;
 }
 
-const MathQuestions = ({ numberRange, operationType }: MathQuestionsProps) => {
+const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQuestionsProps) => {
 
   const [questions, setQuestions] = React.useState<MathQuestion[]>([]);
   const [answers, setAnswers] = React.useState<number[]>([]);
@@ -28,16 +29,58 @@ const MathQuestions = ({ numberRange, operationType }: MathQuestionsProps) => {
   const generateQuestions = React.useCallback(async () => {
     const newQuestions: MathQuestion[] = [];
 
+    let range;
+
+    if (operationType === Operation.ADD || operationType === Operation.MINUS) {
+      range = numberRangeAM;
+    } else {
+      range = numberRangeMD;
+    }
+
+    let loopCount = 0;
+    const maxLoops = 1000;
+
     for (let idx = 0; idx < 10; idx++) {
-      const numA = Math.floor(Math.random() * numberRange);
-      const numB = Math.floor(Math.random() * numberRange);
+      loopCount++;
+
+      let numA = Math.floor(Math.random() * range);
+      let numB = Math.floor(Math.random() * range);
+
+      if (loopCount >= maxLoops) {
+        break;
+      }
+
+      if (operationType === Operation.DIVIDE) {
+        while (numA % numB !== 0) {
+          loopCount++;
+          numB = Math.floor(Math.random() * range);
+
+          if (loopCount >= maxLoops) {
+            break;
+          }
+        }
+      }
+
+      if (operationType === Operation.MULTIPLY || operationType === Operation.DIVIDE) {
+        if (numA === 0 || numB === 0) {
+          idx = idx - 1;
+          continue;
+        }
+      }
+
+      if (operationType === Operation.MINUS || operationType === Operation.DIVIDE) {
+        if (numA < numB) {
+          idx = idx - 1;
+          continue;
+        }
+      }
 
       const question = new MathQuestion(idx, numA, numB, operationType);
       newQuestions.push(question);
     }
 
     setQuestions(newQuestions);
-  }, [numberRange, operationType]);
+  }, [numberRangeAM, numberRangeMD, operationType]);
 
   const getOperationIcon = React.useCallback((operation: Operation) => {
     switch(operation) {

@@ -4,7 +4,7 @@ import MathContainer from 'components/mathContainer.component';
 const SPage = () => {
   return (
     <Box>
-      <MathContainer numberRange={20} />
+      <MathContainer numberRangeAM={20} numberRangeMD={6} />
     </Box>
   );
 }
