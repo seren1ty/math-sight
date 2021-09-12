@@ -4,11 +4,12 @@ import { Operation } from 'model/mathQuestion';
 import React from 'react'
 
 type MathContainerProps = {
+  userId: string;
   numberRangeAM: number;
   numberRangeMD: number;
 }
 
-const MathContainer = ({ numberRangeAM, numberRangeMD }: MathContainerProps) => {
+const MathContainer = ({ userId, numberRangeAM, numberRangeMD }: MathContainerProps) => {
   const [operationType, setOperationType] = React.useState(Operation.ADD);
 
   const handleChange = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
@@ -33,7 +34,7 @@ const MathContainer = ({ numberRangeAM, numberRangeMD }: MathContainerProps) => 
           </Select>
         </FormControl>
       </Box>
-      <MathQuestions numberRangeAM={numberRangeAM} numberRangeMD={numberRangeMD} operationType={operationType} />
+      <MathQuestions userId={userId} numberRangeAM={numberRangeAM} numberRangeMD={numberRangeMD} operationType={operationType} />
     </Box>
   );
 }

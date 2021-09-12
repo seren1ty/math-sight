@@ -4,7 +4,7 @@ import MathContainer from 'components/mathContainer.component';
 const APage = () => {
   return (
     <Box>
-      <MathContainer numberRangeAM={10000} numberRangeMD={12} />
+      <MathContainer userId="a" numberRangeAM={10000} numberRangeMD={12} />
     </Box>
   )
 }

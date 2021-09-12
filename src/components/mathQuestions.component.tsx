@@ -4,16 +4,59 @@ import React from "react";
 import styled from "styled-components";
 
 type MathQuestionsProps = {
+  userId: string;
   numberRangeAM: number;
   numberRangeMD: number;
   operationType: Operation;
 }
 
-const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQuestionsProps) => {
+const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: MathQuestionsProps) => {
+
+  const readCurrentScore = React.useCallback(() => {
+    const rawCurrentScore = localStorage.getItem("mathSight-currentScore-" + userId);
+
+    return !!rawCurrentScore ? Number(JSON.parse(rawCurrentScore)) : 0;
+  }, [userId]);
+
+  const increaseCurrentScore = React.useCallback((newScore: number) => {
+    const updatedCurrentScore = readCurrentScore() + newScore;
+
+    localStorage.setItem("mathSight-currentScore-" + userId, JSON.stringify(updatedCurrentScore));
+
+    setCurrentScore(updatedCurrentScore);
+  }, [userId, readCurrentScore]);
+
+  const resetCurrentScore = React.useCallback(() => {
+    localStorage.setItem("mathSight-currentScore-" + userId, JSON.stringify(0));
+
+    setCurrentScore(0);
+  }, [userId]);
+
+  const readHighScore = React.useCallback(() => {
+    const rawHighScore = localStorage.getItem("mathSight-highScore-" + userId);
+
+    return !!rawHighScore ? JSON.parse(rawHighScore) : 0;
+  }, [userId]);
+
+  const increaseHighScore = React.useCallback((newScore: number) => {
+    const savedHighScore = readHighScore();
+
+    const updatedHighScore = readCurrentScore() + newScore;
+
+    if (updatedHighScore <= savedHighScore) {
+      return;
+    }
+
+    localStorage.setItem("mathSight-highScore-" + userId, JSON.stringify(updatedHighScore));
+
+    setHighScore(updatedHighScore);
+  }, [userId, readCurrentScore, readHighScore]);
 
   const [questions, setQuestions] = React.useState<MathQuestion[]>([]);
   const [answers, setAnswers] = React.useState<number[]>([]);
   const [showResults, setShowResults] = React.useState<boolean>(false);
+  const [highScore, setHighScore] = React.useState<number>(readHighScore());
+  const [currentScore, setCurrentScore] = React.useState<number>(readCurrentScore());
 
   const handleChangeAnswer = React.useCallback((questionId, answer) => {
     const newAnswers = [...answers];
@@ -27,6 +70,12 @@ const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQues
   }, [answers]);
 
   const generateQuestions = React.useCallback(async () => {
+    setQuestions([]);
+    setAnswers([]);
+    setShowResults(false);
+    setHighScore(readHighScore());
+    setCurrentScore(readCurrentScore());
+
     const newQuestions: MathQuestion[] = [];
 
     let range;
@@ -80,7 +129,7 @@ const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQues
     }
 
     setQuestions(newQuestions);
-  }, [numberRangeAM, numberRangeMD, operationType]);
+  }, [numberRangeAM, numberRangeMD, operationType, readHighScore, readCurrentScore]);
 
   const getOperationIcon = React.useCallback((operation: Operation) => {
     switch(operation) {
@@ -104,18 +153,27 @@ const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQues
   }, [answers]);
 
   const calculateCorrectAnswers = React.useCallback(() => {
-    if (!showResults) {
-      return;
+    const correctlyAnsweredQuestions = questions.filter((question) => checkAnswer(question));
+    return correctlyAnsweredQuestions.length;
+  }, [showResults, questions, checkAnswer]);
+
+  const checkAnswers = React.useCallback(() => {
+    const correctlyAnsweredQuestions = calculateCorrectAnswers();
+
+    if (correctlyAnsweredQuestions === questions.length) {
+      increaseHighScore(questions.length);
+      increaseCurrentScore(questions.length);
+    } else {
+      increaseHighScore(correctlyAnsweredQuestions);
+      resetCurrentScore();
     }
 
-    const correctlyAnsweredQuestions = questions.filter((question) => Number(question.getResult()) === Number(answers[question.id]));
-
-    return correctlyAnsweredQuestions.length;
-  }, [showResults, questions, answers]);
+    setShowResults(true);
+  }, [questions, calculateCorrectAnswers, increaseHighScore, increaseCurrentScore, resetCurrentScore]);
 
   React.useEffect(() => {
     generateQuestions();
-  }, [operationType]);
+  }, [operationType, generateQuestions]);
 
   return (
     <Box display="flex" marginX={5} marginY={2}>
@@ -150,11 +208,18 @@ const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQues
       }
       </Box>
       <Box flexDirection="column" margin="100px 0 0 100px">
+        <StyledNewQuestions
+            variant="contained"
+            onClick={() => generateQuestions()}
+            disabled={!showResults}
+          >
+            New Questions
+        </StyledNewQuestions>
         <StyledCheckAnswers
           variant="contained"
           color="primary"
-          onClick={() => setShowResults(true)}
-          disabled={answers.length < questions.length}
+          onClick={() => checkAnswers()}
+          disabled={showResults || answers.length < questions.length}
         >
           Check Answers
         </StyledCheckAnswers>
@@ -162,6 +227,8 @@ const MathQuestions = ({ numberRangeAM, numberRangeMD, operationType }: MathQues
           showResults &&
           <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Correct: {calculateCorrectAnswers()}</Box>
         }
+        <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Current Total: {currentScore}</Box>
+        <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">High Score: {highScore}</Box>
       </Box>
     </Box>
   );
@@ -176,6 +243,13 @@ const StyledAnswerInput = styled.input`
 
 const StyledResult = styled(Box)<{correct: boolean}>`
   color: ${props => props.correct ? "green" : "red"};
+`
+
+const StyledNewQuestions = styled(Button)`
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-right: 10px;
 `
 
 const StyledCheckAnswers = styled(Button)`
