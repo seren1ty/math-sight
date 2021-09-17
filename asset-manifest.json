@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/math-sight/static/css/main.18625bfe.chunk.css",
+    "main.js": "/math-sight/static/js/main.9820c8a5.chunk.js",
+    "main.js.map": "/math-sight/static/js/main.9820c8a5.chunk.js.map",
+    "runtime-main.js": "/math-sight/static/js/runtime-main.cb2fb578.js",
+    "runtime-main.js.map": "/math-sight/static/js/runtime-main.cb2fb578.js.map",
+    "static/js/2.8a3a57f4.chunk.js": "/math-sight/static/js/2.8a3a57f4.chunk.js",
+    "static/js/2.8a3a57f4.chunk.js.map": "/math-sight/static/js/2.8a3a57f4.chunk.js.map",
+    "index.html": "/math-sight/index.html",
+    "static/css/main.18625bfe.chunk.css.map": "/math-sight/static/css/main.18625bfe.chunk.css.map",
+    "static/js/2.8a3a57f4.chunk.js.LICENSE.txt": "/math-sight/static/js/2.8a3a57f4.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cb2fb578.js",
+    "static/js/2.8a3a57f4.chunk.js",
+    "static/css/main.18625bfe.chunk.css",
+    "static/js/main.9820c8a5.chunk.js"
+  ]
+}
