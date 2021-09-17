@@ -6,11 +6,12 @@ import styled from "styled-components";
 type MathQuestionsProps = {
   userId: string;
   numberRangeAM: number;
-  numberRangeMD: number;
+  numberRangeM: number;
+  numberRangeD: number;
   operationType: Operation;
 }
 
-const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: MathQuestionsProps) => {
+const MathQuestions = ({ userId, numberRangeAM, numberRangeM, numberRangeD, operationType }: MathQuestionsProps) => {
 
   const readCurrentScore = React.useCallback(() => {
     const rawCurrentScore = localStorage.getItem("mathSight-currentScore-" + userId);
@@ -86,12 +87,14 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
 
     if (operationType === Operation.ADD || operationType === Operation.MINUS) {
       range = numberRangeAM;
+    } else if (operationType === Operation.MULTIPLY) {
+      range = numberRangeM;
     } else {
-      range = numberRangeMD;
+      range = numberRangeD;
     }
 
     let loopCount = 0;
-    const maxLoops = 1000;
+    const maxLoops = 100000;
 
     for (let idx = 0; idx < 10; idx++) {
       loopCount++;
@@ -104,7 +107,12 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
       }
 
       if (operationType === Operation.DIVIDE) {
-        while (numA % numB !== 0) {
+        if (numA === 1 || numB === 1) {
+          idx = idx - 1;
+          continue;
+        }
+
+        while (numA === numB || numA % numB !== 0) {
           loopCount++;
           numB = Math.floor(Math.random() * range);
 
@@ -133,7 +141,7 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
     }
 
     setQuestions(newQuestions);
-  }, [numberRangeAM, numberRangeMD, operationType, resetFields]);
+  }, [numberRangeAM, numberRangeM, numberRangeD, operationType, resetFields]);
 
   const getOperationIcon = React.useCallback((operation: Operation) => {
     switch(operation) {
@@ -189,12 +197,12 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
       <Box flexDirection="column">
       {
         questions.map((question) => (
-          <Box key={question.id} display="flex" m={2} fontSize={26} fontWeight={700}>
-            <Box display="flex" flexGrow={1} justifyContent="center" textAlign="center">
+          <Box key={question.id} display="flex" m={1.5} fontSize={26} fontWeight={700}>
+            <StyledQuestion>
               <Box pr={1} width="80px">{question.numberOne}</Box>
               <Box pr={1} flexGrow={1}>{getOperationIcon(question.operation)}</Box>
-              <Box pr={4} width="80px">{question.numberTwo}</Box>
-            </Box>
+              <Box width="80px">{question.numberTwo}</Box>
+            </StyledQuestion>
             <StyledAnswerInput
               type="number"
               value={readAnswer(question.id)}
@@ -217,13 +225,6 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
       }
       </Box>
       <Box flexDirection="column" margin="80px 0 0 50px">
-        <StyledNewQuestions
-            variant="contained"
-            onClick={() => generateQuestions()}
-            disabled={!showResults}
-          >
-            New Questions
-        </StyledNewQuestions>
         <StyledCheckAnswers
           variant="contained"
           color="primary"
@@ -232,12 +233,19 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
         >
           Check Answers
         </StyledCheckAnswers>
+        <StyledNewQuestions
+            variant="contained"
+            onClick={() => generateQuestions()}
+            disabled={!showResults}
+          >
+            New Questions
+        </StyledNewQuestions>
         {
           showResults &&
           <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Correct: {calculateCorrectAnswers()}</Box>
         }
-        <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Current Total: {currentScore}</Box>
-        <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">High Score: {highScore}</Box>
+        <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Current total: {currentScore}</Box>
+        <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">High score: {highScore}</Box>
       </Box>
     </Box>
   );
@@ -245,24 +253,44 @@ const MathQuestions = ({ userId, numberRangeAM, numberRangeMD, operationType }: 
 
 export default MathQuestions;
 
+const StyledQuestion = styled(Box)`
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  text-align: center;
+  margin-right: 32px;
+  background: #d1dcf9;
+  border-radius: 25px;
+  font-size: 20px;
+  line-height: 35px;
+`
+
 const StyledAnswerInput = styled.input`
   width: 80px;
   font-size: 20px;
+  border: 2px solid black;
+  border-radius: 25px;
+  outline: none;
+  padding: 5px;
 `
 
 const StyledResult = styled(Box)<{correct: boolean}>`
   color: ${props => props.correct ? "green" : "red"};
 `
 
-const StyledNewQuestions = styled(Button)`
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: 600;
-  margin-right: 10px;
-`
-
 const StyledCheckAnswers = styled(Button)`
   padding: 10px 20px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
+  margin-right: 20px;
+  border-radius: 25px;
+  text-transform: none;
+`
+
+const StyledNewQuestions = styled(Button)`
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
+  text-transform: none;
 `

@@ -7,10 +7,11 @@ import styled from "styled-components";
 type MathContainerProps = {
   userId: string;
   numberRangeAM: number;
-  numberRangeMD: number;
+  numberRangeM: number;
+  numberRangeD: number;
 }
 
-const MathContainer = ({ userId, numberRangeAM, numberRangeMD }: MathContainerProps) => {
+const MathContainer = ({ userId, numberRangeAM, numberRangeM, numberRangeD }: MathContainerProps) => {
 
   const handleChange = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
     localStorage.setItem("mathSight-operationType-" + userId, JSON.stringify(e.target.value));
@@ -54,7 +55,8 @@ const MathContainer = ({ userId, numberRangeAM, numberRangeMD }: MathContainerPr
       <MathQuestions
         userId={userId}
         numberRangeAM={numberRangeAM}
-        numberRangeMD={numberRangeMD}
+        numberRangeM={numberRangeM}
+        numberRangeD={numberRangeD}
         operationType={operationType}
       />
     </Box>
