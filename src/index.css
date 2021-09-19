@@ -12,6 +12,12 @@
   --transition-speed: 600ms;
 }
 
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -27,6 +33,10 @@ body::-webkit-scrollbar-track {
 
 body::-webkit-scrollbar-thumb {
   background: #6649b8;
+}
+
+.App {
+  margin-bottom: 50px;
 }
 
 code {

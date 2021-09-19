@@ -1,9 +1,4 @@
-export enum Operation {
-  ADD,
-  MINUS,
-  MULTIPLY,
-  DIVIDE,
-}
+import { Operation } from "types/types";
 
 export class MathQuestion {
   id: number;
