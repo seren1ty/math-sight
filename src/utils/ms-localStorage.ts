@@ -23,7 +23,9 @@ export const getMsOperationType = (userId: string): Operation => {
   const rawOperationType = localStorage.getItem("mathSight-operationType-" + userId);
 
   if (!rawOperationType) {
-    setMsOperationType(userId, Operation.ADD);
+    if (userId) {
+      setMsOperationType(userId, Operation.ADD);
+    }
     return 0;
   }
 
@@ -38,7 +40,9 @@ export const getMsHighScore = (userId: string): number => {
   const rawHighScore = localStorage.getItem("mathSight-highScore-" + userId);
 
   if (!rawHighScore) {
-    setMsHighScore(userId, 0);
+    if (userId) {
+      setMsHighScore(userId, 0);
+    }
     return 0;
   }
 
@@ -53,7 +57,9 @@ export const getMsCurrentScore = (userId: string): number => {
   const rawCurrentScore = localStorage.getItem("mathSight-currentScore-" + userId);
 
   if (!rawCurrentScore) {
-    setMsOperationType(userId, 0);
+    if (userId) {
+      setMsOperationType(userId, 0);
+    }
     return 0;
   }
 

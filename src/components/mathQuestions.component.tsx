@@ -101,15 +101,15 @@ const StyledQuestion = styled(Box)`
   flex-grow: 1;
   justify-content: center;
   text-align: center;
-  margin-right: 32px;
+  margin-right: 28px;
   background: #d1dcf9;
   border-radius: 10px;
   font-size: 20px;
-  line-height: 35px;
+  line-height: 40px;
 `
 
 const StyledAnswerInput = styled.input`
-  width: 100px;
+  width: 105px;
   font-size: 20px;
   border: 2px solid black;
   border-radius: 10px;
@@ -124,4 +124,5 @@ const StyledAnswerInput = styled.input`
 
 const StyledResult = styled(Box)<{correct: boolean}>`
   color: ${props => props.correct ? "green" : "red"};
+  line-height: 38px;
 `

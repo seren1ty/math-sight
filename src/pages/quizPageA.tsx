@@ -13,7 +13,7 @@ const QuizPageA = () => {
   []);
 
   return (
-    <Box display="flex">
+    <Box display="flex" flexWrap="wrap">
       <LeftContainer />
       <RightContainer />
     </Box>

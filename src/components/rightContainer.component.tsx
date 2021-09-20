@@ -71,7 +71,7 @@ const RightContainer = () => {
 
   return (
     <Box>
-      <Box marginTop="20px">
+      <Box marginTop="25px">
         <StyledOperationSelect
           labelId="demo-simple-select-filled-label"
           id="demo-simple-select-filled"
@@ -90,33 +90,33 @@ const RightContainer = () => {
           <StyledTextarea />
         </Box>
       }
-      <Box flexDirection="column" mt={2}>
-        <StyledCheckAnswers
-          variant="contained"
-          color="primary"
-          onClick={() => checkAnswers()}
-          disabled={session.showResults || session.answers.length < session.questions.length}
-        >
-          Check Answers
-        </StyledCheckAnswers>
-        <StyledNewQuestions
+      <StyledResultContainer>
+        <Box>
+          <StyledCheckAnswers
             variant="contained"
             color="primary"
-            onClick={() => session.generateQuestions()}
-            disabled={!session.showResults}
+            onClick={() => checkAnswers()}
+            disabled={session.showResults || session.answers.length < session.questions.length}
           >
-            New Questions
-        </StyledNewQuestions>
+            Check Answers
+          </StyledCheckAnswers>
+          <StyledNewQuestions
+              variant="contained"
+              color="primary"
+              onClick={() => session.generateQuestions()}
+              disabled={!session.showResults}
+            >
+              New Questions
+          </StyledNewQuestions>
+        </Box>
         {
           session.showResults &&
           <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Correct: {calculateCorrectAnswers()}</Box>
         }
-        <Box textAlign="center">
-          <h1>Results</h1>
-        </Box>
-        <Box marginTop="20px" fontSize={40} fontWeight={600} textAlign="center">Current total: {session.currentScore}</Box>
-        <Box marginTop="20px" fontSize={40} fontWeight={600} textAlign="center">High score: {session.highScore}</Box>
-      </Box>
+        <StyledResultsHeading>Results</StyledResultsHeading>
+        <StyledCurrentScore>Current total: {session.currentScore}</StyledCurrentScore>
+        <StyledHighScore>High score: {session.highScore}</StyledHighScore>
+      </StyledResultContainer>
     </Box>
   );
 }
@@ -124,7 +124,7 @@ const RightContainer = () => {
 export default RightContainer;
 
 const StyledOperationSelect = styled(Select)`
-  width: 350px;
+  width: 385px;
   background: #d1dcf9;
   outline: none;
   border-radius: 10px;
@@ -143,14 +143,19 @@ const StyledOperationSelect = styled(Select)`
     border-bottom: 0px;
   }
 
+  .MuiSelect-root {
+    padding-left: 10px;
+    line-height: 24px;
+  }
+
   .MuiSelect-select:focus {
     border-radius: 10px;
     background: #d1dcf9;
-}
+  }
 `
 
 const StyledTextarea = styled.textarea`
-  width: 350px;
+  width: 385px;
   height: 200px;
   border: 3px solid #d1dcf9;
   border-radius: 10px;
@@ -159,19 +164,55 @@ const StyledTextarea = styled.textarea`
   outline: none;
 `
 
+const StyledResultContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  background: #eeeff2;
+  margin-top: 16px;
+  padding: 20px;
+  border-radius: 10px;
+`
+
 const StyledCheckAnswers = styled(Button)`
-  padding: 10px 20px;
+  padding: 15px 25px;
   font-size: 16px;
-  font-weight: 600;
+  font-family: 'Red Hat Display';
+  font-weight: 400;
   margin-right: 20px;
   border-radius: 10px;
   text-transform: none;
+  background: #4c78e2
 `
 
 const StyledNewQuestions = styled(Button)`
-  padding: 10px 20px;
+  padding: 15px 25px;
   font-size: 16px;
-  font-weight: 600;
+  font-family: 'Red Hat Display';
+  font-weight: 400;
   border-radius: 10px;
   text-transform: none;
+  background: #4c78e2
+`
+
+const StyledResultsHeading = styled.h1`
+  margin: 25px 0 10px;
+  text-align: center;
+  font-family: 'Righteous', cursive;
+`
+
+const StyledCurrentScore = styled(Box)`
+  margin-top: 5px;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+`
+
+const StyledHighScore = styled(Box)`
+  background: #d1dcf9;
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 10px 0 15px 0;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
 `

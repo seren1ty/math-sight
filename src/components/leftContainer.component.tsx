@@ -7,12 +7,17 @@ const LeftContainer = () => {
 
   return (
     <Box>
-      <Box ml={8} mb={4}>
-        <h1>Mathsight</h1>
-      </Box>
+      <StyledHeading>Mathsight</StyledHeading>
       <MathQuestions />
     </Box>
   );
 }
 
 export default LeftContainer;
+
+const StyledHeading = styled.h1`
+  margin: 20px 0;
+  padding: 0 0 10px 115px;
+  font-size: 40px;
+  font-family: 'Righteous', cursive;
+`

@@ -40,33 +40,6 @@ const SessionProvider = ({children}: ContextProps) => {
 
   const [currentScore, setCurrentScore] = useState<number>(getMsCurrentScore(userId));
 
-  useEffect(() => {
-    setMsUserId(userId);
-  }, [userId]);
-
-  useEffect(() => {
-    if (!userId)
-      return;
-
-    setMsHighScore(userId, highScore);
-  }, [userId, highScore]);
-
-  useEffect(() => {
-    if (!userId)
-      return;
-
-    setMsCurrentScore(userId, currentScore);
-  }, [userId, currentScore]);
-
-  useEffect(() => {
-    if (!userId)
-      return;
-
-    setMsOperationType(userId, operationType);
-
-    generateQuestions();
-  }, [userId, operationType]);
-
   const initUser = React.useCallback((newUserId: string, newNumberRangeAS: number, newNumberRangeM: number, newNumberRangeD: number) => {
     numberRangeAS.current = newNumberRangeAS;
     numberRangeM.current = newNumberRangeM;
@@ -150,6 +123,36 @@ const SessionProvider = ({children}: ContextProps) => {
   const checkAnswer = React.useCallback((question: MathQuestion) => {
     return Number(answers[question.id]) === Number(question.getResult());
   }, [answers]);
+
+  useEffect(() => {
+    if (!userId)
+      return;
+
+    setMsUserId(userId);
+  }, [userId]);
+
+  useEffect(() => {
+    if (!userId)
+      return;
+
+    setMsHighScore(userId, highScore);
+  }, [userId, highScore]);
+
+  useEffect(() => {
+    if (!userId)
+      return;
+
+    setMsCurrentScore(userId, currentScore);
+  }, [userId, currentScore]);
+
+  useEffect(() => {
+    if (!userId)
+      return;
+
+    setMsOperationType(userId, operationType);
+
+    generateQuestions();
+  }, [userId, operationType]);
 
   return (
     <SessionContext.Provider value={{
