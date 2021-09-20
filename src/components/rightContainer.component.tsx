@@ -87,7 +87,7 @@ const RightContainer = () => {
       {
         !session.showResults &&
         <Box mt={2}>
-          <StyledTextarea />
+          <StyledTextarea placeholder="Working area ..." />
         </Box>
       }
       <StyledResultContainer>
