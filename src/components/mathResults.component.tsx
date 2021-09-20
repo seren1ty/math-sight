@@ -83,11 +83,14 @@ const MathResults = () => {
               New Questions
           </StyledNewQuestions>
         </Box>
+        <StyledResultsHeading>Results</StyledResultsHeading>
         {
           session.showResults &&
-          <Box marginTop="60px" fontSize={40} fontWeight={600} textAlign="center">Correct: {calculateCorrectAnswers()}</Box>
+          <Box position="relative">
+            <StyledNewResult>{calculateCorrectAnswers()}</StyledNewResult>
+            <StyledOutOfTen>out of 10</StyledOutOfTen>
+          </Box>
         }
-        <StyledResultsHeading>Results</StyledResultsHeading>
         <StyledCurrentScore>Current total: {session.currentScore}</StyledCurrentScore>
         <StyledHighScore>High score: {session.highScore}</StyledHighScore>
       </StyledResultContainer>
@@ -131,6 +134,21 @@ const StyledResultsHeading = styled.h1`
   margin: 25px 0 10px;
   text-align: center;
   font-family: 'Righteous', cursive;
+`
+
+const StyledNewResult = styled(Box)`
+  marginTop: 20px;
+  font-size: 190px;
+  font-family: 'Questrial', sans-serif;
+  text-align: center;
+  color: #48dda7;
+`
+
+const StyledOutOfTen = styled(Box)`
+  position: absolute;
+  right: 8px;
+  bottom: 35px;
+  font-size: 20px;
 `
 
 const StyledCurrentScore = styled(Box)`

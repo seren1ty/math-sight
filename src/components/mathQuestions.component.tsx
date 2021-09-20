@@ -123,6 +123,6 @@ const StyledAnswerInput = styled.input`
 `
 
 const StyledResult = styled(Box)<{correct: boolean}>`
-  color: ${props => props.correct ? "green" : "red"};
+  color: ${props => props.correct ? "#48dda7" : "red"};
   line-height: 38px;
 `
