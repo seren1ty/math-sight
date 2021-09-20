@@ -137,7 +137,7 @@ const StyledResultsHeading = styled.h1`
 `
 
 const StyledNewResult = styled(Box)`
-  marginTop: 20px;
+  margin-top: 3px;
   font-size: 190px;
   font-family: 'Questrial', sans-serif;
   text-align: center;
