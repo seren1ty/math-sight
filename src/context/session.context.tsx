@@ -57,8 +57,6 @@ const SessionProvider = ({children}: ContextProps) => {
   },
   [
     userId,
-    currentScore,
-    highScore,
     setQuestions,
     setAnswers,
     setOperationType,
@@ -139,7 +137,7 @@ const SessionProvider = ({children}: ContextProps) => {
     }
 
     setQuestions(newQuestions);
-  }, [numberRangeAS, numberRangeM, numberRangeD, operationType, resetFields]);
+  }, [numberRangeAS, numberRangeM, numberRangeD, operationType, resetFields, isPrime]);
 
   const checkAnswer = React.useCallback((question: MathQuestion) => {
     return Number(answers[question.id]) === Number(question.getResult());

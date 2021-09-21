@@ -1,6 +1,5 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import { Box } from "@material-ui/core";
 import MathQuestions from "components/mathQuestions.component";
-import React from "react";
 import styled from "styled-components";
 
 const LeftContainer = () => {

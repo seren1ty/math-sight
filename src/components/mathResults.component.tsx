@@ -69,7 +69,7 @@ const MathResults = () => {
           variant="contained"
           color="primary"
           onClick={() => checkAnswers()}
-        disabled={session.showResults || session.answers.length < session.questions.length}
+          disabled={session.showResults || session.answers.length < session.questions.length}
         >
           Check Answers
         </StyledCheckAnswers>
@@ -147,7 +147,7 @@ const StyledNewResult = styled(Box)<{showresults: boolean}>`
 const StyledOutOfTen = styled(Box)<{showresults: boolean}>`
   position: absolute;
   right: 8px;
-  bottom: 35px;
+  bottom: 50px;
   font-size: 20px;
   opacity: ${props => props.showresults ? "100" : "0"};
 `
