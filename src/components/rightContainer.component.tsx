@@ -9,9 +9,15 @@ const RightContainer = () => {
 
   const session = React.useContext(SessionContext);
 
+  const [workingArea, setWorkingArea] = React.useState("");
+
   const handleChangeOperationType = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
     session?.setOperationType(e.target.value as Operation);
   }, [session]);
+
+  React.useEffect(() => {
+    setWorkingArea("");
+  }, [session?.showResults]);
 
   if (!session) {
     return null;
@@ -32,12 +38,12 @@ const RightContainer = () => {
           <MenuItem value={Operation.DIVIDE}>Divide</MenuItem>
         </StyledOperationSelect>
       </Box>
-      {
-        !session.showResults &&
-        <Box mt={2}>
-          <StyledTextarea placeholder="Working area ..." />
-        </Box>
-      }
+      <StyledTextarea
+        showresults={session.showResults}
+        placeholder="Working area ..."
+        value={workingArea}
+        onChange={(e) => setWorkingArea(e.target.value)}
+      />
       <MathResults />
     </Box>
   );
@@ -76,12 +82,16 @@ const StyledOperationSelect = styled(Select)`
   }
 `
 
-const StyledTextarea = styled.textarea`
+const StyledTextarea = styled.textarea<{showresults: boolean}>`
   width: 385px;
-  height: 200px;
-  border: 3px solid #d1dcf9;
   border-radius: 10px;
   font-size: 18px;
-  padding: 15px;
+  margin-bottom: 0px;
   outline: none;
+  transition: all 1s;
+  height: ${props => props.showresults ? "0px" : "200px"};
+  opacity: ${props => props.showresults ? "0" : "100"};
+  border: ${props => props.showresults ? "0" : "3px solid #d1dcf9"};
+  margin-top: ${props => props.showresults ? "0px" : "16px"};
+  padding: ${props => props.showresults ? "0 15px" : "15px 15px"};
 `

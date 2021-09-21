@@ -63,50 +63,47 @@ const MathResults = () => {
   }
 
   return (
-    <Box>
-      <StyledResultContainer>
-        <Box>
-          <StyledCheckAnswers
+    <StyledResultContainer showresults={session.showResults}>
+      <Box>
+        <StyledCheckAnswers
+          variant="contained"
+          color="primary"
+          onClick={() => checkAnswers()}
+        disabled={session.showResults || session.answers.length < session.questions.length}
+        >
+          Check Answers
+        </StyledCheckAnswers>
+        <StyledNewQuestions
             variant="contained"
             color="primary"
-            onClick={() => checkAnswers()}
-            disabled={session.showResults || session.answers.length < session.questions.length}
+            onClick={() => session.generateQuestions()}
+            disabled={!session.showResults}
           >
-            Check Answers
-          </StyledCheckAnswers>
-          <StyledNewQuestions
-              variant="contained"
-              color="primary"
-              onClick={() => session.generateQuestions()}
-              disabled={!session.showResults}
-            >
-              New Questions
-          </StyledNewQuestions>
-        </Box>
-        <StyledResultsHeading>Results</StyledResultsHeading>
-        {
-          session.showResults &&
-          <Box position="relative">
-            <StyledNewResult>{calculateCorrectAnswers()}</StyledNewResult>
-            <StyledOutOfTen>out of 10</StyledOutOfTen>
-          </Box>
-        }
-        <StyledCurrentScore>Current total: {session.currentScore}</StyledCurrentScore>
-        <StyledHighScore>High score: {session.highScore}</StyledHighScore>
-      </StyledResultContainer>
-    </Box>
+            New Questions
+        </StyledNewQuestions>
+      </Box>
+      <StyledResultsHeading>Results</StyledResultsHeading>
+      <Box position="relative">
+        <StyledNewResult showresults={session.showResults}>{calculateCorrectAnswers()}</StyledNewResult>
+        <StyledOutOfTen showresults={session.showResults}>out of 10</StyledOutOfTen>
+      </Box>
+      <StyledCurrentScore>Current total: {session.currentScore}</StyledCurrentScore>
+      <StyledHighScore>High score: {session.highScore}</StyledHighScore>
+    </StyledResultContainer>
   );
 }
 
 export default MathResults;
 
-const StyledResultContainer = styled(Box)`
+const StyledResultContainer = styled(Box)<{showresults: boolean}>`
   display: flex;
   flex-direction: column;
   background: #eeeff2;
-  margin-top: 16px;
   padding: 20px;
   border-radius: 10px;
+  transition: height 1s, margin-top 1s;
+  height: ${props => props.showresults ? "505px" : "292px"};
+  margin-top: ${props => props.showresults ? "0px" : "13px"};
 `
 
 const StyledCheckAnswers = styled(Button)`
@@ -136,19 +133,23 @@ const StyledResultsHeading = styled.h1`
   font-family: 'Righteous', cursive;
 `
 
-const StyledNewResult = styled(Box)`
+const StyledNewResult = styled(Box)<{showresults: boolean}>`
   margin-top: 3px;
-  font-size: 190px;
   font-family: 'Questrial', sans-serif;
   text-align: center;
   color: #48dda7;
+  transition: height 1s, font-size 1s, opacity 1s;
+  font-size: ${props => props.showresults ? "190px": "0px"};
+  height: ${props => props.showresults ? "213px": "0px"};
+  opacity: ${props => props.showresults ? "100" : "0"};
 `
 
-const StyledOutOfTen = styled(Box)`
+const StyledOutOfTen = styled(Box)<{showresults: boolean}>`
   position: absolute;
   right: 8px;
   bottom: 35px;
   font-size: 20px;
+  opacity: ${props => props.showresults ? "100" : "0"};
 `
 
 const StyledCurrentScore = styled(Box)`
