@@ -136,14 +136,14 @@ const SessionProvider = ({children}: ContextProps) => {
       return;
 
     setMsHighScore(userId, highScore);
-  }, [userId, highScore]);
+  }, [highScore]);
 
   useEffect(() => {
     if (!userId)
       return;
 
     setMsCurrentScore(userId, currentScore);
-  }, [userId, currentScore]);
+  }, [currentScore]);
 
   useEffect(() => {
     if (!userId)
@@ -152,7 +152,7 @@ const SessionProvider = ({children}: ContextProps) => {
     setMsOperationType(userId, operationType);
 
     generateQuestions();
-  }, [userId, operationType]);
+  }, [operationType]);
 
   return (
     <SessionContext.Provider value={{
