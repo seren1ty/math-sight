@@ -51,7 +51,7 @@ const MathQuestions = () => {
 
   React.useEffect(() => {
     session?.generateQuestions();
-  }, []);
+  }, [session?.userId]);
 
   if (!session) {
     return null;
