@@ -33,7 +33,7 @@ const RightContainer = () => {
           onChange={handleChangeOperationType}
         >
           <MenuItem value={Operation.ADD}>Add</MenuItem>
-          <MenuItem value={Operation.MINUS}>Minus</MenuItem>
+          <MenuItem value={Operation.MINUS}>Subtract</MenuItem>
           <MenuItem value={Operation.MULTIPLY}>Multiply</MenuItem>
           <MenuItem value={Operation.DIVIDE}>Divide</MenuItem>
         </StyledOperationSelect>

@@ -67,6 +67,15 @@ const SessionProvider = ({children}: ContextProps) => {
     setCurrentScore
   ]);
 
+  const isPrime = React.useCallback((number: number) => {
+    for (let idx = 2, sqr = Math.sqrt(number); idx <= sqr; idx++) {
+      if (number % idx === 0) {
+        return false;
+      }
+    }
+    return number > 1;
+  }, []);
+
   const generateQuestions = React.useCallback(() => {
     resetFields();
 
@@ -96,7 +105,7 @@ const SessionProvider = ({children}: ContextProps) => {
       }
 
       if (operationType === Operation.DIVIDE) {
-        if (numA === 1 || numB === 1) {
+        if (numA === 1 || numB === 1 || isPrime(numA)) {
           idx = idx - 1;
           continue;
         }

@@ -8,7 +8,7 @@ const QuizPageS = () => {
   const session = React.useContext(SessionContext);
 
   React.useEffect(() => {
-    session?.initUser("s", 20, 6, 12);
+    session?.initUser("s", 20, 6, 16);
   },
   []);
 
