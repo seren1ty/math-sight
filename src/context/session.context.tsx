@@ -51,9 +51,21 @@ const SessionProvider = ({children}: ContextProps) => {
     setQuestions([]);
     setAnswers([]);
     setShowResults(false);
-    setHighScore(highScore);
-    setCurrentScore(currentScore);
-  }, [setQuestions, setAnswers, setShowResults, setHighScore, highScore, setCurrentScore, currentScore]);
+    setOperationType(getMsOperationType(userId));
+    setHighScore(getMsHighScore(userId));
+    setCurrentScore(getMsCurrentScore(userId));
+  },
+  [
+    userId,
+    currentScore,
+    highScore,
+    setQuestions,
+    setAnswers,
+    setOperationType,
+    setShowResults,
+    setHighScore,
+    setCurrentScore
+  ]);
 
   const generateQuestions = React.useCallback(() => {
     resetFields();
@@ -129,6 +141,7 @@ const SessionProvider = ({children}: ContextProps) => {
       return;
 
     setMsUserId(userId);
+    generateQuestions();
   }, [userId]);
 
   useEffect(() => {

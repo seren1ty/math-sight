@@ -49,10 +49,6 @@ const MathQuestions = () => {
     return answer || "";
   }, [session]);
 
-  React.useEffect(() => {
-    session?.generateQuestions();
-  }, [session?.userId]);
-
   if (!session) {
     return null;
   }
