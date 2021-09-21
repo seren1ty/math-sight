@@ -83,6 +83,7 @@ const StyledOperationSelect = styled(Select)`
 `
 
 const StyledTextarea = styled.textarea<{showresults: boolean}>`
+  resize: none;
   width: 385px;
   border-radius: 10px;
   font-size: 18px;
