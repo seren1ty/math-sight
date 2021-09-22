@@ -77,7 +77,7 @@ const SessionProvider = ({children}: ContextProps) => {
   const generateQuestions = React.useCallback(() => {
     resetFields();
 
-    const newQuestions: MathQuestion[] = [];
+    let newQuestions: MathQuestion[] = [];
 
     let range;
 
@@ -90,7 +90,7 @@ const SessionProvider = ({children}: ContextProps) => {
     }
 
     let loopCount = 0;
-    const maxLoops = 100000;
+    const maxLoops = 1000000;
 
     for (let idx = 0; idx < 10; idx++) {
       loopCount++;
@@ -103,7 +103,7 @@ const SessionProvider = ({children}: ContextProps) => {
       }
 
       if (operationType === Operation.MULTIPLY || operationType === Operation.DIVIDE) {
-        if (numA === 0 || numB === 0 || numA === 1 || numB === 1) {
+        if (numA <= 1 || numB <= 1) {
           idx = idx - 1;
           continue;
         }
@@ -132,8 +132,14 @@ const SessionProvider = ({children}: ContextProps) => {
         }
       }
 
-      const question = new MathQuestion(idx, numA, numB, operationType);
-      newQuestions.push(question);
+      const questionAlreadyExists = newQuestions.some((q) => q.numberOne === numA && q.numberTwo === numB);
+
+      if (!questionAlreadyExists) {
+        const question = new MathQuestion(idx, numA, numB, operationType);
+        newQuestions.push(question);
+      } else {
+        idx = idx - 1;
+      }
     }
 
     setQuestions(newQuestions);
