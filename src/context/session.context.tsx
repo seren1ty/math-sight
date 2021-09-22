@@ -102,24 +102,8 @@ const SessionProvider = ({children}: ContextProps) => {
         break;
       }
 
-      if (operationType === Operation.DIVIDE) {
-        if (numA === 1 || numB === 1 || isPrime(numA)) {
-          idx = idx - 1;
-          continue;
-        }
-
-        while (numA === numB || numA % numB !== 0) {
-          loopCount++;
-          numB = Math.floor(Math.random() * range);
-
-          if (loopCount >= maxLoops) {
-            break;
-          }
-        }
-      }
-
       if (operationType === Operation.MULTIPLY || operationType === Operation.DIVIDE) {
-        if (numA === 0 || numB === 0) {
+        if (numA === 0 || numB === 0 || numA === 1 || numB === 1) {
           idx = idx - 1;
           continue;
         }
@@ -129,6 +113,22 @@ const SessionProvider = ({children}: ContextProps) => {
         if (numA < numB) {
           idx = idx - 1;
           continue;
+        }
+      }
+
+      if (operationType === Operation.DIVIDE) {
+        if (isPrime(numA)) {
+          idx = idx - 1;
+          continue;
+        }
+
+        while (numA === numB || numA % numB !== 0 || numB === 1) {
+          loopCount++;
+          numB = Math.floor(Math.random() * range);
+
+          if (loopCount >= maxLoops) {
+            break;
+          }
         }
       }
 
