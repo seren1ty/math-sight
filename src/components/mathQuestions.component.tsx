@@ -74,8 +74,12 @@ const MathQuestions = () => {
               width="100px"
               pl={3}
               lineHeight="30px"
-              correct={session.checkAnswer(question)}
+              correct={session.showResults && session.checkAnswer(question)}
             >
+            {
+              !session.showResults && isAnswerEnabled(question.id) &&
+              <StyledQuestionMark>?</StyledQuestionMark>
+            }
             {
               session.showResults &&
               <Box>{question.getResult()}</Box>
@@ -121,4 +125,17 @@ const StyledAnswerInput = styled.input`
 const StyledResult = styled(Box)<{correct: boolean}>`
   color: ${props => props.correct ? "#48dda7" : "red"};
   line-height: 38px;
+`
+
+const StyledQuestionMark = styled(Box)`
+  width: 45px;
+  height: 40px;
+  background: #e0e0e030;
+  border-radius: 25%;
+  margin-top: 0px;
+  margin-left: 0px;
+  color: #80808020;
+  font-weight: 600;
+  text-align: center;
+  line-height: 40px;
 `

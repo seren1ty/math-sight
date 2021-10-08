@@ -114,7 +114,11 @@ const StyledCheckAnswers = styled(Button)`
   margin-right: 20px;
   border-radius: 10px;
   text-transform: none;
-  background: #4c78e2
+  background: #4c78e2;
+
+  @media (max-width: 920px) {
+    margin-right: 15px;
+  }
 `
 
 const StyledNewQuestions = styled(Button)`
@@ -124,7 +128,7 @@ const StyledNewQuestions = styled(Button)`
   font-weight: 400;
   border-radius: 10px;
   text-transform: none;
-  background: #4c78e2
+  background: #4c78e2;
 `
 
 const StyledResultsHeading = styled.h1`

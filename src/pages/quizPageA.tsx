@@ -3,6 +3,7 @@ import LeftContainer from 'components/leftContainer.component';
 import RightContainer from 'components/rightContainer.component';
 import { SessionContext } from 'context/session.context';
 import React from 'react';
+import styled, { css } from 'styled-components';
 
 const QuizPageA = () => {
   const session = React.useContext(SessionContext);
