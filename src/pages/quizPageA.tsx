@@ -9,7 +9,7 @@ const QuizPageA = () => {
   const session = React.useContext(SessionContext);
 
   React.useEffect(() => {
-    session?.initUser("a", 1000, 12, 100);
+    session?.initUser("a", 300, 12, 100);
   },
   []);
 
