@@ -82,7 +82,7 @@ const MathQuestions = () => {
             }
             {
               session.showResults &&
-              <Box>{question.getResult()}</Box>
+              <StyledAnswer>{question.getResult()}</StyledAnswer>
             }
             </StyledResult>
           </Box>
@@ -128,14 +128,28 @@ const StyledResult = styled(Box)<{correct: boolean}>`
 `
 
 const StyledQuestionMark = styled(Box)`
-  width: 45px;
+  width: 100px;
   height: 40px;
   background: #e0e0e030;
-  border-radius: 25%;
+  border-radius: 10px;
   margin-top: 0px;
   margin-left: 0px;
   color: #80808020;
   font-weight: 600;
   text-align: center;
   line-height: 40px;
+
+  @media (max-width: 920px) {
+    width: 45px;
+  }
+`
+
+const StyledAnswer = styled(Box)`
+  width: 90px;
+  text-align: center;
+  font-size: 24px;
+
+  @media (max-width: 920px) {
+    width: 45px;
+  }
 `
