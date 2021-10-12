@@ -31,12 +31,12 @@ The app will reload if you make edits.
 
 ***
 
-Mathsigth is a kids math quiz app that presents 10 questions at a time, and allows selection between Simple/Advanced
+Mathsight is a kids math quiz app that presents 10 questions at a time. It allows selection between Simple/Advanced
 questions via the url (see above), and selection of different operation types via an easy to use Select box. The operations are:
 Add, Subtract, Multiply and Divide.
 
 Local-storage is used to store, and display, the highest continuous run of correct answers, as well as the users current
-number of correct answers in a row, so they can leave and come back later to continue trying to set a new high score.
+number of correct answers in a row, so they can leave and come back later to continue trying to reach their new high score.
 
 A working area is also provided so the user can type any text/numbers that might assist with solving a question.
 
@@ -44,7 +44,7 @@ A working area is also provided so the user can type any text/numbers that might
 
 ***
 
-After completing all questions, the user can Check Answers to see both the correct answers and their scores.
+After completing all questions, the user can click Check Answers to see both the correct answers and their updated scores.
 
 ![AC Tracker - Login - Screenshot](./public/math-sight_answers_1_small.png)
 
