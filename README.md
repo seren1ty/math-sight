@@ -1,5 +1,11 @@
 # math-sight
-Simple math quiz app for kids [Typescript, ReactJS, local-storage, styled-components, mobile responsive]
+Simple math quiz app for kids [Typescript, ReactJS, local-storage, styled-components, Material-UI, mobile responsive]
+
+Simple Mode: https://seren1ty.github.io/math-sight/#/s
+
+Advanced Mode: https://seren1ty.github.io/math-sight/#/a
+
+WIP - Custom Modes.
 
 ***
 
