@@ -1,7 +1,7 @@
 import { Box } from "@material-ui/core";
 import MathQuestions from "components/mathQuestions.component";
 import styled from "styled-components";
-import OperationSelect from "./operationSelect.component";
+import OperationSelect from "components/operationSelect.component";
 
 const LeftContainer = () => {
 

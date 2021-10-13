@@ -2,8 +2,8 @@ import { Box } from "@material-ui/core";
 import { SessionContext } from "context/session.context";
 import React from "react";
 import styled from "styled-components";
-import MathResults from "./mathResults.component";
-import OperationSelect from "./operationSelect.component";
+import MathResults from "components/mathResults.component";
+import OperationSelect from "components/operationSelect.component";
 
 const RightContainer = () => {
 

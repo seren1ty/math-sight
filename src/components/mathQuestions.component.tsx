@@ -65,6 +65,7 @@ const MathQuestions = () => {
               <Box width="80px">{question.numberTwo}</Box>
             </StyledQuestion>
             <StyledAnswerInput
+              data-testid={`AnswerInput-${question.id}`}
               type="number"
               value={readAnswer(question.id)}
               onChange={(e) => handleChangeAnswer(question.id, e.target.value)}
