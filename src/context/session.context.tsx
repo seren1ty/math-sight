@@ -7,9 +7,12 @@ import {
   setMsHighScore,
   setMsUserId,
   getMsOperationType,
-  setMsCurrentScore
+  setMsCurrentScore,
+  getMsAccountId,
+  getMsAccounts,
+  getMsUsers
 } from 'utils/ms-localStorage';
-import { Operation, Session } from 'types/types';
+import { Account, Operation, Session, User } from 'types/types';
 import { MathQuestion } from 'model/mathQuestion';
 
 type ContextProps = {
@@ -24,6 +27,12 @@ const SessionProvider = ({
   initialQuestions,
 }: ContextProps) => {
 
+  const [accounts, setAccounts] = useState<Account[]>(getMsAccounts());
+
+  const [accountId, setAccountId] = useState<string>(getMsAccountId());
+
+  const [users, setUsers] = useState<User[]>(getMsUsers(accountId));
+
   const [userId, setUserId] = useState<string>(getMsUserId());
 
   const numberRangeAS = React.useRef<number>(0);
@@ -31,8 +40,6 @@ const SessionProvider = ({
   const numberRangeD = React.useRef<number>(0);
 
   const [operationType, setOperationType] = React.useState(getMsOperationType(userId));
-
-  const [difficulty, setDifficulty] = React.useState(getMsOperationType(userId));
 
   const [questions, setQuestions] = useState<MathQuestion[]>(initialQuestions || []);
 

@@ -1,5 +1,15 @@
 import { MathQuestion } from "model/mathQuestion";
 
+export type Account = {
+  accountId: string;
+  accountName: string;
+}
+
+export type User = {
+  userId: string;
+  userName: string;
+}
+
 export type Session = {
   userId: string;
   operationType: Operation;
