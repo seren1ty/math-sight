@@ -2,15 +2,18 @@ import { MathQuestion } from "model/mathQuestion";
 
 export type Account = {
   accountId: string;
-  accountName: string;
+  name: string;
 }
 
 export type User = {
   userId: string;
-  userName: string;
+  name: string;
+  highScore?: number;
+  currentScore?: number;
 }
 
 export type Session = {
+  users: User[];
   userId: string;
   operationType: Operation;
   questions: MathQuestion[];
@@ -18,6 +21,7 @@ export type Session = {
   showResults: boolean;
   highScore: number;
   currentScore: number;
+  setUsers: (users: User[]) => void;
   initUser: (userId: string, numberRangeAS: number, numberRangeM: number, numberRangeD: number) => void;
   setUserId: (userId: string) => void;
   setOperationType: (operation: Operation) => void;

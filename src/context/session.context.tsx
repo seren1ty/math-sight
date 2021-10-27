@@ -193,6 +193,7 @@ const SessionProvider = ({
 
   return (
     <SessionContext.Provider value={{
+      users,
       userId,
       operationType,
       questions,
@@ -200,6 +201,7 @@ const SessionProvider = ({
       showResults,
       highScore,
       currentScore,
+      setUsers,
       initUser,
       setUserId,
       setOperationType,

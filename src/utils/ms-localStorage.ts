@@ -30,7 +30,7 @@ export const getMsAccountId = (): string => {
     console.log("New account created: " + newAccountId);
 
     setMsAccountId(newAccountId);
-    setMsAccounts([...getMsAccounts(), { accountId: newAccountId, accountName: "Default" }]);
+    setMsAccounts([...getMsAccounts(), { accountId: newAccountId, name: "Default" }]);
 
     return newAccountId;
   }
