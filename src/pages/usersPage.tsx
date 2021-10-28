@@ -82,6 +82,11 @@ const StyledUser = styled(Box)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &:hover {
+    background: #e6e8f5;
+    border: 3px solid #7D9DED;
+  }
 `
 
 const StyledName = styled(Box)`
