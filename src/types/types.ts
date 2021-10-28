@@ -13,6 +13,8 @@ export type User = {
 }
 
 export type Session = {
+  accounts: Account[];
+  accountId: string;
   users: User[];
   userId: string;
   operationType: Operation;
@@ -21,6 +23,8 @@ export type Session = {
   showResults: boolean;
   highScore: number;
   currentScore: number;
+  setAccounts: (accounts: Account[]) => void;
+  setAccountId: (accountId: string) => void;
   setUsers: (users: User[]) => void;
   initUser: (userId: string, numberRangeAS: number, numberRangeM: number, numberRangeD: number) => void;
   setUserId: (userId: string) => void;

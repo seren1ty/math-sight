@@ -2,13 +2,12 @@ import { Box, MenuItem, Select } from '@material-ui/core';
 import { SessionContext } from 'context/session.context';
 import React from 'react'
 import styled from 'styled-components';
-import { Operation } from 'types/types';
 
-const OperationSelect = () => {
+const AccountSelect = () => {
   const session = React.useContext(SessionContext);
 
-  const handleChangeOperationType = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
-    session?.setOperationType(e.target.value as Operation);
+  const handleChangeAccount = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
+    session?.setAccountId(e.target.value as string);
   }, [session]);
 
   if (!session) {
@@ -17,20 +16,18 @@ const OperationSelect = () => {
 
   return (
     <Box marginTop="25px">
-      <StyledOperationSelect
-        value={session.operationType}
-        onChange={handleChangeOperationType}
-      >
-        <MenuItem value={Operation.ADD}>Add</MenuItem>
-        <MenuItem value={Operation.MINUS}>Subtract</MenuItem>
-        <MenuItem value={Operation.MULTIPLY}>Multiply</MenuItem>
-        <MenuItem value={Operation.DIVIDE}>Divide</MenuItem>
-      </StyledOperationSelect>
+      <StyledAccountSelect value={session.accountId} onChange={handleChangeAccount}>
+      {
+        session.accounts.map((account) => (
+          <MenuItem value={account.accountId}>{account.name}</MenuItem>
+        ))
+      }
+      </StyledAccountSelect>
     </Box>
   )
 }
 
-const StyledOperationSelect = styled(Select)`
+const StyledAccountSelect = styled(Select)`
   width: 385px;
   background: #d1dcf9;
   outline: none;
@@ -65,4 +62,4 @@ const StyledOperationSelect = styled(Select)`
   }
 `
 
-export default OperationSelect;
+export default AccountSelect;

@@ -193,6 +193,8 @@ const SessionProvider = ({
 
   return (
     <SessionContext.Provider value={{
+      accounts,
+      accountId,
       users,
       userId,
       operationType,
@@ -201,6 +203,8 @@ const SessionProvider = ({
       showResults,
       highScore,
       currentScore,
+      setAccounts,
+      setAccountId,
       setUsers,
       initUser,
       setUserId,

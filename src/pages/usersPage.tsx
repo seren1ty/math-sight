@@ -4,6 +4,7 @@ import React from 'react';
 import { User } from 'types/types';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
+import AccountSelect from 'components/accountSelect.component';
 
 const UsersPage = () => {
   const history = useHistory();
@@ -25,7 +26,10 @@ const UsersPage = () => {
 
   return (
     <StyledContainer display="flex" flexDirection="column" flexWrap="wrap">
-      <StyledHeading>Mathsight</StyledHeading>
+      <StyledTitleHeadingContainer>
+        <StyledTitleHeading>Mathsight</StyledTitleHeading>
+        <AccountSelect />
+      </StyledTitleHeadingContainer>
       <StyledHeadingUsers>Users</StyledHeadingUsers>
       <StyledUsers>
         {
@@ -52,7 +56,13 @@ const StyledContainer = styled(Box)`
   flex-wrap: wrap;
 `
 
-const StyledHeading = styled.h1`
+const StyledTitleHeadingContainer = styled(Box)`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`
+
+const StyledTitleHeading = styled.h1`
   margin-top: 20px;
   margin-left: 65px;
   font-family: 'Righteous', cursive;
