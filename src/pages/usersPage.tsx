@@ -26,12 +26,16 @@ const UsersPage = () => {
   return (
     <StyledContainer display="flex" flexDirection="column" flexWrap="wrap">
       <StyledHeading>Mathsight</StyledHeading>
-      <h3>Users</h3>
+      <StyledHeadingUsers>Users</StyledHeadingUsers>
       <StyledUsers>
         {
           session.users.map((user) => (
             <StyledUser key={user.userId} onClick={() => selectUser(user)}>
-              {user.name}
+              <StyledName>{user.name}</StyledName>
+              <StyledScores>
+                <StyledCurrentScore>Current score: <StyledScore>{user.currentScore}</StyledScore></StyledCurrentScore>
+                <StyledHighScore>High score: <StyledScore>{user.highScore}</StyledScore></StyledHighScore>
+              </StyledScores>
             </StyledUser>
           ))
         }
@@ -51,8 +55,14 @@ const StyledContainer = styled(Box)`
 const StyledHeading = styled.h1`
   margin-top: 20px;
   margin-left: 65px;
-  font-size: 40px;
   font-family: 'Righteous', cursive;
+  font-size: 40px;
+`
+
+const StyledHeadingUsers = styled.span`
+  margin: 10px 0 30px;
+  font-family: 'Red Hat Display', sans-serif;
+  font-size: 24px;
 `
 
 const StyledUsers = styled(Box)`
@@ -65,9 +75,46 @@ const StyledUsers = styled(Box)`
 const StyledUser = styled(Box)`
   width: 380px;
   height: 125px;
+  padding: 5px 10px 5px 15px;
   background: #EEEFF2;
   border-radius: 10px;
-  border: 3px solid #d1dcf9;
+  border: 3px solid #D1DCF9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`
+
+const StyledName = styled(Box)`
+  margin: 0px 1px;
+  text-align: left;
+  font-size: 30px;
+  font-weight: 600;
+  color: #7D9DED;
+`
+
+const StyledScores = styled(Box)`
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`
+
+const StyledCurrentScore = styled(Box)`
+  text-align: right;
+  font-size: 18px;
+`
+
+const StyledHighScore = styled(Box)`
+  text-align: right;
+  font-size: 22px;
+  font-weight: 700;
+  color: #48DDA7;
+`
+
+const StyledScore = styled.span`
+  display: inline-block;
+  width: 45px;
+  text-align: center;
 `
 
 export default UsersPage;
