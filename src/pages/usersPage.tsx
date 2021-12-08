@@ -62,7 +62,7 @@ const UsersPage = () => {
     <StyledContainer display="flex" flexDirection="column" flexWrap="wrap">
       <StyledTitleHeadingContainer>
         <StyledTitleHeading>Mathsight</StyledTitleHeading>
-        <AccountSelect />
+        {/* <AccountSelect /> */}
       </StyledTitleHeadingContainer>
       <StyledHeadingUsers>Difficulty</StyledHeadingUsers>
       <StyledUsers>
