@@ -3,13 +3,18 @@ import { MathQuestion } from "model/mathQuestion";
 export type Account = {
   accountId: string;
   name: string;
+  userIds: string[];
 }
 
 export type User = {
   userId: string;
   name: string;
+  numberRangeAS: number;
+  numberRangeM: number;
+  numberRangeD: number;
   highScore?: number;
   currentScore?: number;
+  operationType?: Operation;
 }
 
 export type Session = {
@@ -26,7 +31,6 @@ export type Session = {
   setAccounts: (accounts: Account[]) => void;
   setAccountId: (accountId: string) => void;
   setUsers: (users: User[]) => void;
-  initUser: (userId: string, numberRangeAS: number, numberRangeM: number, numberRangeD: number) => void;
   setUserId: (userId: string) => void;
   setOperationType: (operation: Operation) => void;
   setQuestions: (questions: MathQuestion[]) => void;

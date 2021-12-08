@@ -51,6 +51,10 @@ const StyledAccountSelect = styled(Select)`
     border-bottom: 0px;
   }
 
+  &.MuiInput-underline:after {
+    border-bottom: 0px;
+  }
+
   .MuiSelect-root {
     padding-left: 10px;
     line-height: 24px;

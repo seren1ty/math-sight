@@ -1,5 +1,6 @@
 import { Account, Operation, User } from "types/types";
 import uuid from "react-uuid";
+import { setTimeout } from "timers";
 
 export const setMsAccounts = (accounts: Account[]): void => {
   localStorage.setItem("mathSight-accounts", JSON.stringify(accounts));
@@ -30,7 +31,7 @@ export const getMsAccountId = (): string => {
     console.log("New account created: " + newAccountId);
 
     setMsAccountId(newAccountId);
-    setMsAccounts([...getMsAccounts(), { accountId: newAccountId, name: "Default" }]);
+    setMsAccounts([...getMsAccounts(), { accountId: newAccountId, name: "Default", userIds: [] }]);
 
     return newAccountId;
   }
@@ -111,10 +112,42 @@ export const getMsCurrentScore = (userId: string): number => {
 
   if (!rawCurrentScore) {
     if (userId) {
-      setMsOperationType(userId, 0);
+      setMsCurrentScore(userId, 0);
     }
     return 0;
   }
 
   return Number(JSON.parse(rawCurrentScore));
+}
+
+export const delayedPromise = async () => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log('Here 2');
+      resolve(true);
+    }, 5000);
+  })
+}
+
+export const callPromise = async () => {
+  await Promise.all([delayedPromise, Promise.resolve(4)]);
+  console.log('Here 1');
+}
+
+export class TestClass {
+  private a;
+  private b;
+
+  constructor() {
+    this.a = 1;
+    this.b = 2;
+  }
+
+  getA = () => this.a;
+  getB = () => this.b;
+}
+
+const callClass = () => {
+  const test = new TestClass();
+  console.log(test.getA());
 }

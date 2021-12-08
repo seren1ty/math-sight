@@ -64,24 +64,20 @@ const MathResults = () => {
 
   return (
     <StyledResultContainer showresults={session.showResults}>
-      <Box>
+      <StyledButtonContainer>
         <StyledCheckAnswers
-          variant="contained"
-          color="primary"
           onClick={() => checkAnswers()}
-          disabled={session.showResults || session.answers.length < session.questions.length}
+          isDisabled={session.showResults || session.answers.length < session.questions.length}
         >
           Check Answers
         </StyledCheckAnswers>
         <StyledNewQuestions
-            variant="contained"
-            color="primary"
-            onClick={() => session.generateQuestions()}
-            disabled={!session.showResults}
-          >
-            New Questions
+          onClick={() => session.generateQuestions()}
+          isDisabled={!session.showResults}
+        >
+          New Questions
         </StyledNewQuestions>
-      </Box>
+      </StyledButtonContainer>
       <StyledResultsHeading>Results</StyledResultsHeading>
       <Box position="relative">
         <StyledNewResult showresults={session.showResults}>{calculateCorrectAnswers()}</StyledNewResult>
@@ -106,29 +102,65 @@ const StyledResultContainer = styled(Box)<{showresults: boolean}>`
   margin-top: ${props => props.showresults ? "0px" : "13px"};
 `
 
-const StyledCheckAnswers = styled(Button)`
-  padding: 15px 25px;
-  font-size: 16px;
-  font-family: 'Red Hat Display';
-  font-weight: 400;
-  margin-right: 20px;
-  border-radius: 10px;
-  text-transform: none;
-  background: #4c78e2;
-
-  @media (max-width: 920px) {
-    margin-right: 15px;
-  }
+const StyledButtonContainer = styled(Box)`
+  display: flex;
 `
 
-const StyledNewQuestions = styled(Button)`
+const StyledCheckAnswers = styled(Box)<{isDisabled: boolean}>`
+  width: 162px;
+  height: 58px;
   padding: 15px 25px;
+  line-height: 28px;
+  font-size: 16px;
+  font-family: 'Red Hat Display';
+  font-weight: 400;
+  margin-right: 21px;
+  border-radius: 10px;
+  text-transform: none;
+  background: ${props => props.isDisabled ? "#0000001f" : "#4c78e2"};
+  color: ${props => props.isDisabled ? "#00000042" : "#ffffff"};
+  cursor: pointer;
+  transition: background 0.5s ease;
+
+  ${props => !props.isDisabled && `
+    box-shadow: 0 1px 3px 0 #888888;
+
+    &:hover {
+      background: #303f9f;
+    }
+  `}
+
+  ${props => props.isDisabled && `
+    pointer-events: none;
+  `}
+`
+
+const StyledNewQuestions = styled(Box)<{isDisabled: boolean}>`
+  width: 162px;
+  height: 58px;
+  padding: 15px 25px;
+  line-height: 28px;
   font-size: 16px;
   font-family: 'Red Hat Display';
   font-weight: 400;
   border-radius: 10px;
   text-transform: none;
-  background: #4c78e2;
+  background: ${props => props.isDisabled ? "#0000001f" : "#4c78e2"};
+  color: ${props => props.isDisabled ? "#00000042" : "#ffffff"};
+  cursor: pointer;
+  transition: background 0.5s ease;
+
+  ${props => !props.isDisabled && `
+    box-shadow: 0 1px 3px 0 #888888;
+
+    &:hover {
+      background: #303f9f;
+    }
+  `}
+
+  ${props => props.isDisabled && `
+    pointer-events: none;
+  `}
 `
 
 const StyledResultsHeading = styled.h1`

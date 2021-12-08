@@ -10,7 +10,8 @@ import {
   setMsCurrentScore,
   getMsAccountId,
   getMsAccounts,
-  getMsUsers
+  getMsUsers,
+  setMsUsers
 } from 'utils/ms-localStorage';
 import { Account, Operation, Session, User } from 'types/types';
 import { MathQuestion } from 'model/mathQuestion';
@@ -35,6 +36,8 @@ const SessionProvider = ({
 
   const [userId, setUserId] = useState<string>(getMsUserId());
 
+  const currentUser = React.useMemo(() => users.find((user) => user.userId === userId), [users, userId]);
+
   const numberRangeAS = React.useRef<number>(0);
   const numberRangeM = React.useRef<number>(0);
   const numberRangeD = React.useRef<number>(0);
@@ -50,13 +53,6 @@ const SessionProvider = ({
   const [highScore, setHighScore] = useState<number>(getMsHighScore(userId));
 
   const [currentScore, setCurrentScore] = useState<number>(getMsCurrentScore(userId));
-
-  const initUser = React.useCallback((newUserId: string, newNumberRangeAS: number, newNumberRangeM: number, newNumberRangeD: number) => {
-    numberRangeAS.current = newNumberRangeAS;
-    numberRangeM.current = newNumberRangeM;
-    numberRangeD.current = newNumberRangeD;
-    setUserId(newUserId);
-  }, []);
 
   const resetFields = React.useCallback(() => {
     setQuestions([]);
@@ -160,31 +156,67 @@ const SessionProvider = ({
     return Number(answers[question.id]) === Number(question.getResult());
   }, [answers]);
 
+  const updateUser = React.useCallback((userToUpdate: User) => {
+    const otherUsers = users.filter((user) => user.userId != userToUpdate.userId);
+    setUsers([...otherUsers, userToUpdate]);
+  }, [users]);
+
   useEffect(() => {
-    if (!userId)
+    if (!userId) {
       return;
+    }
 
     setMsUserId(userId);
+
+    numberRangeAS.current = currentUser?.numberRangeAS || 10;
+    numberRangeM.current = currentUser?.numberRangeM || 10;
+    numberRangeD.current = currentUser?.numberRangeD || 10;
+
+    setOperationType(currentUser?.operationType || Operation.ADD);
+
     generateQuestions();
   }, [userId]);
 
   useEffect(() => {
-    if (!userId)
+    if (!userId) {
       return;
+    }
+
+    if (currentUser) {
+      updateUser({ ...currentUser, highScore });
+    }
 
     setMsHighScore(userId, highScore);
   }, [highScore]);
 
   useEffect(() => {
-    if (!userId)
+    if (!userId) {
       return;
+    }
+
+    if (currentUser) {
+      updateUser({ ...currentUser, currentScore });
+    }
 
     setMsCurrentScore(userId, currentScore);
   }, [currentScore]);
 
   useEffect(() => {
-    if (!userId)
+    if (!accountId) {
       return;
+    }
+
+    setMsUsers(accountId, users);
+  }, [users]);
+
+  useEffect(() => {
+    if (!userId) {
+      return;
+    }
+
+    if (currentUser) {
+      updateUser({ ...currentUser, operationType });
+    }
 
     setMsOperationType(userId, operationType);
 
@@ -206,7 +238,6 @@ const SessionProvider = ({
       setAccounts,
       setAccountId,
       setUsers,
-      initUser,
       setUserId,
       setOperationType,
       setQuestions,

@@ -1,24 +1,58 @@
 import { Box } from '@material-ui/core';
 import { SessionContext } from 'context/session.context';
 import React from 'react';
-import { User } from 'types/types';
+import { Operation, User } from 'types/types';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
 import AccountSelect from 'components/accountSelect.component';
+
+const DEFAULT_USERS: User[] = [
+  {
+    userId: "s",
+    name: "Simple",
+    numberRangeAS: 20,
+    numberRangeM: 7,
+    numberRangeD: 16,
+    highScore: 0,
+    currentScore: 0,
+    operationType: Operation.ADD
+  },
+  {
+    userId: "a",
+    name: "Advanced",
+    numberRangeAS: 300,
+    numberRangeM: 12,
+    numberRangeD: 100,
+    highScore: 0,
+    currentScore: 0,
+    operationType: Operation.ADD
+  }
+]
 
 const UsersPage = () => {
   const history = useHistory();
 
   const session = React.useContext(SessionContext);
 
+  const currentUsers = React.useMemo(() => {
+    if (!session?.users) {
+      return [];
+    }
+    const users: User[] = [...session?.users];
+    users.sort((userA, userB) => userB.userId.localeCompare(userA.userId));
+    return users;
+  }, [session?.users]);
+
   const selectUser = React.useCallback((user: User) => {
+    session?.setUserId(user.userId);
     history.push("/" + user.userId);
   }, []);
 
   React.useEffect(() => {
-    session?.initUser("a", 300, 12, 100);
-  },
-  []);
+    if (session?.users.length === 0) {
+      session?.setUsers(DEFAULT_USERS);
+    }
+  }, []);
 
   if (!session) {
     return null;
@@ -30,10 +64,10 @@ const UsersPage = () => {
         <StyledTitleHeading>Mathsight</StyledTitleHeading>
         <AccountSelect />
       </StyledTitleHeadingContainer>
-      <StyledHeadingUsers>Users</StyledHeadingUsers>
+      <StyledHeadingUsers>Difficulty</StyledHeadingUsers>
       <StyledUsers>
         {
-          session.users.map((user) => (
+          currentUsers.map((user) => (
             <StyledUser key={user.userId} onClick={() => selectUser(user)}>
               <StyledName>{user.name}</StyledName>
               <StyledScores>
