@@ -1,6 +1,5 @@
 import { SessionProvider } from "context/session.context";
-import QuizPageA from "pages/quizPageA";
-import QuizPageS from "pages/quizPageS";
+import QuizPage from "pages/quizPage";
 import UsersPage from "pages/usersPage";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -11,8 +10,8 @@ function App() {
         <div className="App">
           <Switch>
             <Route path="/" exact component={UsersPage} />
-            <Route path="/a" exact component={QuizPageA} />
-            <Route path="/s" exact component={QuizPageS} />
+            <Route path="/a" exact component={QuizPage} />
+            <Route path="/s" exact component={QuizPage} />
           </Switch>
         </div>
       </SessionProvider>
