@@ -83,7 +83,6 @@ const UsersPage = () => {
 }
 
 const StyledContainer = styled(Box)`
-  width: 810px;
   margin: 0 50px;
   display: flex;
   flex-direction: column;
@@ -101,6 +100,11 @@ const StyledTitleHeading = styled.h1`
   margin-left: 65px;
   font-family: 'Righteous', cursive;
   font-size: 40px;
+  transition: margin-left 1s ease;
+
+  @media(max-width: 810px) {
+    margin-left: 85px;
+  }
 `
 
 const StyledHeadingUsers = styled.span`
