@@ -54,7 +54,7 @@ const MathQuestions = () => {
   }
 
   return (
-    <Box marginX={5}>
+    <MathQuestionsContainer>
       <Box flexDirection="column">
       {
         session.questions.map((question) => (
@@ -73,7 +73,6 @@ const MathQuestions = () => {
             />
             <StyledResult
               width="100px"
-              pl={3}
               lineHeight="30px"
               correct={session.showResults && session.checkAnswer(question)}
             >
@@ -91,11 +90,19 @@ const MathQuestions = () => {
       }
       </Box>
 
-    </Box>
+    </MathQuestionsContainer>
   );
 };
 
 export default MathQuestions;
+
+const MathQuestionsContainer = styled(Box)`
+  margin: 0 40px;
+
+  @media (max-width: 920px) {
+    margin: 0 10px;
+  }
+`
 
 const StyledQuestion = styled(Box)`
   display: flex;
@@ -107,6 +114,10 @@ const StyledQuestion = styled(Box)`
   border-radius: 10px;
   font-size: 20px;
   line-height: 40px;
+
+  @media (max-width: 920px) {
+    margin-right: 20px;
+  }
 `
 
 const StyledAnswerInput = styled.input`
@@ -124,8 +135,13 @@ const StyledAnswerInput = styled.input`
 `
 
 const StyledResult = styled(Box)<{correct: boolean}>`
+  margin-left: 24px;
   color: ${props => props.correct ? "#48dda7" : "red"};
   line-height: 38px;
+
+  @media (max-width: 920px) {
+    margin-left: 20px;
+  }
 `
 
 const StyledQuestionMark = styled(Box)`

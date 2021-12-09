@@ -65,18 +65,18 @@ const MathResults = () => {
   return (
     <StyledResultContainer showresults={session.showResults}>
       <StyledButtonContainer>
-        <StyledCheckAnswers
+        <StyledButton
           onClick={() => checkAnswers()}
           isDisabled={session.showResults || session.answers.length < session.questions.length}
         >
           Check Answers
-        </StyledCheckAnswers>
-        <StyledNewQuestions
+        </StyledButton>
+        <StyledButton
           onClick={() => session.generateQuestions()}
           isDisabled={!session.showResults}
         >
           New Questions
-        </StyledNewQuestions>
+        </StyledButton>
       </StyledButtonContainer>
       <StyledResultsHeading>Results</StyledResultsHeading>
       <Box position="relative">
@@ -100,42 +100,19 @@ const StyledResultContainer = styled(Box)<{showresults: boolean}>`
   transition: height 1s, margin-top 1s;
   height: ${props => props.showresults ? "505px" : "292px"};
   margin-top: ${props => props.showresults ? "0px" : "13px"};
+
+  @media (max-width: 920px) {
+    margin-left: 10px;
+    width: 375px;
+  }
 `
 
 const StyledButtonContainer = styled(Box)`
   display: flex;
+  gap: 21px;
 `
 
-const StyledCheckAnswers = styled(Box)<{isDisabled: boolean}>`
-  width: 162px;
-  height: 58px;
-  padding: 15px 25px;
-  line-height: 28px;
-  font-size: 16px;
-  font-family: 'Red Hat Display';
-  font-weight: 400;
-  margin-right: 21px;
-  border-radius: 10px;
-  text-transform: none;
-  background: ${props => props.isDisabled ? "#0000001f" : "#4c78e2"};
-  color: ${props => props.isDisabled ? "#00000042" : "#ffffff"};
-  cursor: pointer;
-  transition: background 0.5s ease;
-
-  ${props => !props.isDisabled && `
-    box-shadow: 0 1px 3px 0 #888888;
-
-    &:hover {
-      background: #303f9f;
-    }
-  `}
-
-  ${props => props.isDisabled && `
-    pointer-events: none;
-  `}
-`
-
-const StyledNewQuestions = styled(Box)<{isDisabled: boolean}>`
+const StyledButton = styled(Box)<{isDisabled: boolean}>`
   width: 162px;
   height: 58px;
   padding: 15px 25px;
@@ -161,6 +138,10 @@ const StyledNewQuestions = styled(Box)<{isDisabled: boolean}>`
   ${props => props.isDisabled && `
     pointer-events: none;
   `}
+
+  @media (max-width: 920px) {
+    padding: 15px 22px;
+  }
 `
 
 const StyledResultsHeading = styled.h1`

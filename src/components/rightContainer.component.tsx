@@ -42,7 +42,7 @@ const StyledRightContainer = styled(Box)`
 
   @media (max-width: 920px) {
     margin-top: 0;
-    margin-left: 50px;
+    margin-left: 10px;
   }
 `
 
@@ -59,10 +59,15 @@ const StyledTextarea = styled.textarea<{showresults: boolean}>`
   font-size: 18px;
   margin-bottom: 0px;
   outline: none;
-  transition: all 1s;
+  transition: height 1s, opacity 1s, border 1s, margin-top 1s, padding 1s;
   height: ${props => props.showresults ? "0px" : "200px"};
   opacity: ${props => props.showresults ? "0" : "100"};
   border: ${props => props.showresults ? "0" : "3px solid #d1dcf9"};
   margin-top: ${props => props.showresults ? "0px" : "16px"};
   padding: ${props => props.showresults ? "0 15px" : "15px 15px"};
+
+  @media (max-width: 920px) {
+    margin-left: 10px;
+    width: 375px;
+  }
 `

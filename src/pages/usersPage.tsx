@@ -87,6 +87,10 @@ const StyledContainer = styled(Box)`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+
+  @media(min-width: 921px) {
+    width: 920px;
+  }
 `
 
 const StyledTitleHeadingContainer = styled(Box)`
@@ -102,7 +106,7 @@ const StyledTitleHeading = styled.h1`
   font-size: 40px;
   transition: margin-left 1s ease;
 
-  @media(max-width: 810px) {
+  @media(max-width: 920px) {
     margin-left: 85px;
   }
 `

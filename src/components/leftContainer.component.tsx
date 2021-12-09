@@ -33,7 +33,7 @@ const StyledHeading = styled.h1`
   cursor: pointer;
 
   @media (max-width: 920px) {
-    margin: 20px 0 0 70px;
+    margin: 20px 0 0 30px;
     padding: 0 0 10px 0px;
     font-size: 28px;
   }
