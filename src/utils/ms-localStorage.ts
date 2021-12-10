@@ -119,35 +119,3 @@ export const getMsCurrentScore = (userId: string): number => {
 
   return Number(JSON.parse(rawCurrentScore));
 }
-
-export const delayedPromise = async () => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('Here 2');
-      resolve(true);
-    }, 5000);
-  })
-}
-
-export const callPromise = async () => {
-  await Promise.all([delayedPromise, Promise.resolve(4)]);
-  console.log('Here 1');
-}
-
-export class TestClass {
-  private a;
-  private b;
-
-  constructor() {
-    this.a = 1;
-    this.b = 2;
-  }
-
-  getA = () => this.a;
-  getB = () => this.b;
-}
-
-const callClass = () => {
-  const test = new TestClass();
-  console.log(test.getA());
-}
