@@ -4,7 +4,7 @@ import React from 'react';
 import { Operation, User } from 'types/types';
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
-import AccountSelect from 'components/accountSelect.component';
+//import AccountSelect from 'components/accountSelect.component';
 
 const DEFAULT_USERS: User[] = [
   {
@@ -89,7 +89,8 @@ const StyledContainer = styled(Box)`
   flex-wrap: wrap;
 
   @media(max-width: 921px) {
-    width: 100%;
+    min-width: 410px;
+    width: 410px;
     margin-left: 0;
     padding: 0 50px;
   }
