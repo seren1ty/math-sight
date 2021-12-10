@@ -35,8 +35,7 @@ const StyledOperationSelect = styled(Select)`
   background: #d1dcf9;
   outline: none;
   border-radius: 10px;
-  font-size: 20px;
-  padding: 10px;
+  padding: 7px;
 
   &::before {
     border: 0px;
@@ -60,12 +59,22 @@ const StyledOperationSelect = styled(Select)`
 
   .MuiSelect-root {
     padding-left: 10px;
-    line-height: 24px;
+    line-height: 28px;
+    font-size: 24px;
   }
 
   .MuiSelect-select:focus {
     border-radius: 10px;
     background: #d1dcf9;
+  }
+
+  @media (max-width: 920px) {
+    padding: 10px;
+
+    .MuiSelect-root {
+      line-height: 24px;
+      font-size: 20px;
+    }
   }
 `
 
