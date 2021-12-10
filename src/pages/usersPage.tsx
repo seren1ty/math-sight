@@ -83,13 +83,12 @@ const UsersPage = () => {
 }
 
 const StyledContainer = styled(Box)`
-  margin-left: 50px;
+  margin: 0 50px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 
   @media(max-width: 921px) {
-    min-width: 410px;
     width: 100%;
     margin-left: 0;
     padding: 0 50px;
