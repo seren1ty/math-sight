@@ -59,7 +59,7 @@ const UsersPage = () => {
   }
 
   return (
-    <StyledContainer display="flex" flexDirection="column" flexWrap="wrap">
+    <StyledContainer>
       <StyledTitleHeadingContainer>
         <StyledTitleHeading>Mathsight</StyledTitleHeading>
         {/* <AccountSelect /> */}
@@ -83,13 +83,16 @@ const UsersPage = () => {
 }
 
 const StyledContainer = styled(Box)`
-  margin: 0 50px;
+  margin-left: 50px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 
-  @media(min-width: 921px) {
-    width: 920px;
+  @media(max-width: 921px) {
+    min-width: 410px;
+    width: 100%;
+    margin-left: 0;
+    padding: 0 50px;
   }
 `
 
@@ -107,7 +110,7 @@ const StyledTitleHeading = styled.h1`
   transition: margin-left 1s ease;
 
   @media(max-width: 920px) {
-    margin-left: 85px;
+    margin: 20px auto;
   }
 `
 
@@ -125,7 +128,8 @@ const StyledUsers = styled(Box)`
 `
 
 const StyledUser = styled(Box)`
-  width: 380px;
+  max-width: 380px;
+  flex-grow: 1;
   height: 125px;
   padding: 5px 10px 5px 15px;
   background: #EEEFF2;

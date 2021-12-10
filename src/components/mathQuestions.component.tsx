@@ -71,11 +71,7 @@ const MathQuestions = () => {
               onChange={(e) => handleChangeAnswer(question.id, e.target.value)}
               disabled={!isAnswerEnabled(question.id)}
             />
-            <StyledResult
-              width="100px"
-              lineHeight="30px"
-              correct={session.showResults && session.checkAnswer(question)}
-            >
+            <StyledResult correct={session.showResults && session.checkAnswer(question)}>
             {
               !session.showResults && isAnswerEnabled(question.id) &&
               <StyledQuestionMark>?</StyledQuestionMark>
@@ -135,11 +131,14 @@ const StyledAnswerInput = styled.input`
 `
 
 const StyledResult = styled(Box)<{correct: boolean}>`
+  width: 100px;
+  line-height: 30px;
   margin-left: 24px;
   color: ${props => props.correct ? "#48dda7" : "red"};
   line-height: 38px;
 
   @media (max-width: 920px) {
+    width: 45px;
     margin-left: 20px;
   }
 `
@@ -149,8 +148,7 @@ const StyledQuestionMark = styled(Box)`
   height: 40px;
   background: #e0e0e030;
   border-radius: 10px;
-  margin-top: 0px;
-  margin-left: 0px;
+  margin: 0px;
   color: #80808020;
   font-weight: 600;
   text-align: center;
