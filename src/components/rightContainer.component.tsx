@@ -38,8 +38,6 @@ const RightContainer = () => {
 export default RightContainer;
 
 const StyledRightContainer = styled(Box)`
-  margin-top: 10px;
-
   @media (max-width: 920px) {
     margin-top: 0;
     margin-left: 10px;

@@ -1,14 +1,23 @@
 import { Box } from '@material-ui/core';
 import LeftContainer from 'components/leftContainer.component';
 import RightContainer from 'components/rightContainer.component';
+import styled from 'styled-components';
 
 const QuizPage = () => {
   return (
-    <Box display="flex" flexWrap="wrap">
+    <StyledQuizContainer>
       <LeftContainer />
       <RightContainer />
-    </Box>
+    </StyledQuizContainer>
   )
 }
 
 export default QuizPage;
+
+const StyledQuizContainer = styled(Box)`
+  display: flex;
+
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
+`
