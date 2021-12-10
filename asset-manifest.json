@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/math-sight/static/css/main.7f3c470f.chunk.css",
-    "main.js": "/math-sight/static/js/main.b49a2be1.chunk.js",
-    "main.js.map": "/math-sight/static/js/main.b49a2be1.chunk.js.map",
+    "main.js": "/math-sight/static/js/main.ab2e62ee.chunk.js",
+    "main.js.map": "/math-sight/static/js/main.ab2e62ee.chunk.js.map",
     "runtime-main.js": "/math-sight/static/js/runtime-main.cb2fb578.js",
     "runtime-main.js.map": "/math-sight/static/js/runtime-main.cb2fb578.js.map",
-    "static/js/2.50df4517.chunk.js": "/math-sight/static/js/2.50df4517.chunk.js",
-    "static/js/2.50df4517.chunk.js.map": "/math-sight/static/js/2.50df4517.chunk.js.map",
+    "static/js/2.6e7a8c1d.chunk.js": "/math-sight/static/js/2.6e7a8c1d.chunk.js",
+    "static/js/2.6e7a8c1d.chunk.js.map": "/math-sight/static/js/2.6e7a8c1d.chunk.js.map",
     "index.html": "/math-sight/index.html",
     "static/css/main.7f3c470f.chunk.css.map": "/math-sight/static/css/main.7f3c470f.chunk.css.map",
-    "static/js/2.50df4517.chunk.js.LICENSE.txt": "/math-sight/static/js/2.50df4517.chunk.js.LICENSE.txt"
+    "static/js/2.6e7a8c1d.chunk.js.LICENSE.txt": "/math-sight/static/js/2.6e7a8c1d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.cb2fb578.js",
-    "static/js/2.50df4517.chunk.js",
+    "static/js/2.6e7a8c1d.chunk.js",
     "static/css/main.7f3c470f.chunk.css",
-    "static/js/main.b49a2be1.chunk.js"
+    "static/js/main.ab2e62ee.chunk.js"
   ]
 }
