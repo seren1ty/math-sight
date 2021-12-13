@@ -36,7 +36,7 @@ const SessionProvider = ({
 
   const [userId, setUserId] = useState<string>(getMsUserId());
 
-  const currentUser = React.useMemo(() => users.find((user) => user.userId === userId), [users, userId]);
+  const currentUser = React.useRef<User>();
 
   const numberRangeAS = React.useRef<number>(0);
   const numberRangeM = React.useRef<number>(0);
@@ -162,17 +162,18 @@ const SessionProvider = ({
   }, [users]);
 
   useEffect(() => {
-    if (!userId) {
+    if (!userId || !users || users.length === 0) {
       return;
     }
 
     setMsUserId(userId);
+    currentUser.current = users.find(user => user.userId === userId);
 
-    numberRangeAS.current = currentUser?.numberRangeAS || 10;
-    numberRangeM.current = currentUser?.numberRangeM || 10;
-    numberRangeD.current = currentUser?.numberRangeD || 10;
+    numberRangeAS.current = currentUser.current?.numberRangeAS || 10;
+    numberRangeM.current = currentUser.current?.numberRangeM || 10;
+    numberRangeD.current = currentUser.current?.numberRangeD || 10;
 
-    setOperationType(currentUser?.operationType || Operation.ADD);
+    setOperationType(currentUser.current?.operationType || Operation.ADD);
 
     generateQuestions();
   }, [userId]);
@@ -182,8 +183,9 @@ const SessionProvider = ({
       return;
     }
 
-    if (currentUser) {
-      updateUser({ ...currentUser, highScore });
+    if (currentUser.current) {
+      currentUser.current = { ...currentUser.current, highScore };
+      updateUser(currentUser.current);
     }
 
     setMsHighScore(userId, highScore);
@@ -194,8 +196,9 @@ const SessionProvider = ({
       return;
     }
 
-    if (currentUser) {
-      updateUser({ ...currentUser, currentScore });
+    if (currentUser.current) {
+      currentUser.current = { ...currentUser.current, currentScore };
+      updateUser(currentUser.current);
     }
 
     setMsCurrentScore(userId, currentScore);
@@ -214,8 +217,10 @@ const SessionProvider = ({
       return;
     }
 
-    if (currentUser) {
-      updateUser({ ...currentUser, operationType });
+
+    if (currentUser.current) {
+      currentUser.current = { ...currentUser.current, operationType };
+      updateUser(currentUser.current);
     }
 
     setMsOperationType(userId, operationType);
