@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/math-sight/static/css/main.7f3c470f.chunk.css",
-    "main.js": "/math-sight/static/js/main.fdef990a.chunk.js",
-    "main.js.map": "/math-sight/static/js/main.fdef990a.chunk.js.map",
+    "main.js": "/math-sight/static/js/main.5eadf5c1.chunk.js",
+    "main.js.map": "/math-sight/static/js/main.5eadf5c1.chunk.js.map",
     "runtime-main.js": "/math-sight/static/js/runtime-main.cb2fb578.js",
     "runtime-main.js.map": "/math-sight/static/js/runtime-main.cb2fb578.js.map",
     "static/js/2.6e7a8c1d.chunk.js": "/math-sight/static/js/2.6e7a8c1d.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.cb2fb578.js",
     "static/js/2.6e7a8c1d.chunk.js",
     "static/css/main.7f3c470f.chunk.css",
-    "static/js/main.fdef990a.chunk.js"
+    "static/js/main.5eadf5c1.chunk.js"
   ]
 }
