@@ -1,96 +1,109 @@
-import { Box } from "@material-ui/core";
-import { SessionContext } from "context/session.context";
-import React from "react";
-import styled from "styled-components";
-import { Operation } from "types/types";
+import { Box } from '@material-ui/core'
+import { SessionContext } from 'context/session.context'
+import React from 'react'
+import styled from 'styled-components'
+import { Operation } from 'types/types'
 
 const MathQuestions = () => {
+  const session = React.useContext(SessionContext)
 
-  const session = React.useContext(SessionContext);
+  const handleChangeAnswer = React.useCallback(
+    (questionId, answer) => {
+      if (!session) {
+        return
+      }
 
-  const handleChangeAnswer = React.useCallback((questionId, answer) => {
-    if (!session) {
-      return;
-    }
+      const newAnswers = [...session.answers]
 
-    const newAnswers = [...session.answers];
+      if (newAnswers.length <= questionId) newAnswers.push(answer)
+      else newAnswers[questionId] = answer
 
-    if (newAnswers.length <= questionId)
-      newAnswers.push(answer);
-    else
-      newAnswers[questionId] = answer;
-
-    session.setAnswers(newAnswers);
-  }, [session]);
+      session.setAnswers(newAnswers)
+    },
+    [session]
+  )
 
   const getOperationIcon = React.useCallback((operation: Operation) => {
-    switch(operation) {
+    switch (operation) {
       case Operation.MINUS:
-        return "-";
+        return '-'
       case Operation.MULTIPLY:
-        return "x";
+        return 'x'
       case Operation.DIVIDE:
-        return "/";
+        return '/'
       default:
-        return "+";
+        return '+'
     }
-  }, []);
+  }, [])
 
-  const isAnswerEnabled = React.useCallback((questionId: number) => {
-    if (!session) {
-      return false;
-    }
+  const isAnswerEnabled = React.useCallback(
+    (questionId: number) => {
+      if (!session) {
+        return false
+      }
 
-    return questionId === 0 || questionId < session?.answers.length + 1;
-  }, [session]);
+      return questionId === 0 || questionId < session?.answers.length + 1
+    },
+    [session]
+  )
 
-  const readAnswer = React.useCallback((questionId: number) => {
-    const answer = session?.answers[questionId];
-    return answer || "";
-  }, [session]);
+  const readAnswer = React.useCallback(
+    (questionId: number) => {
+      const answer = session?.answers[questionId]
+      return answer || ''
+    },
+    [session]
+  )
 
   if (!session) {
-    return null;
+    return null
   }
 
   return (
     <MathQuestionsContainer>
       <Box flexDirection="column">
-      {
-        session.questions.map((question) => (
-          <Box key={question.id} display="flex" m={1.5} fontSize={26} fontWeight={700}>
+        {session.questions.map(question => (
+          <Box
+            key={question.id}
+            display="flex"
+            m={1.5}
+            fontSize={26}
+            fontWeight={700}
+          >
             <StyledQuestion>
-              <Box pr={1} width="80px">{question.numberOne}</Box>
-              <Box pr={1} flexGrow={1}>{getOperationIcon(question.operation)}</Box>
+              <Box pr={1} width="80px">
+                {question.numberOne}
+              </Box>
+              <Box pr={1} flexGrow={1}>
+                {getOperationIcon(question.operation)}
+              </Box>
               <Box width="80px">{question.numberTwo}</Box>
             </StyledQuestion>
             <StyledAnswerInput
               data-testid={`AnswerInput-${question.id}`}
               type="number"
               value={readAnswer(question.id)}
-              onChange={(e) => handleChangeAnswer(question.id, e.target.value)}
+              onChange={e => handleChangeAnswer(question.id, e.target.value)}
               disabled={!isAnswerEnabled(question.id)}
             />
-            <StyledResult correct={session.showResults && session.checkAnswer(question)}>
-            {
-              !session.showResults && isAnswerEnabled(question.id) &&
-              <StyledQuestionMark>?</StyledQuestionMark>
-            }
-            {
-              session.showResults &&
-              <StyledAnswer>{question.getResult()}</StyledAnswer>
-            }
+            <StyledResult
+              correct={session.showResults && session.checkAnswer(question)}
+            >
+              {!session.showResults && isAnswerEnabled(question.id) && (
+                <StyledQuestionMark>?</StyledQuestionMark>
+              )}
+              {session.showResults && (
+                <StyledAnswer>{question.getResult()}</StyledAnswer>
+              )}
             </StyledResult>
           </Box>
-        ))
-      }
+        ))}
       </Box>
-
     </MathQuestionsContainer>
-  );
-};
+  )
+}
 
-export default MathQuestions;
+export default MathQuestions
 
 const MathQuestionsContainer = styled(Box)`
   margin: 0 40px;
@@ -130,11 +143,11 @@ const StyledAnswerInput = styled.input`
   }
 `
 
-const StyledResult = styled(Box)<{correct: boolean}>`
+const StyledResult = styled(Box)<{ correct: boolean }>`
   width: 100px;
   line-height: 30px;
   margin-left: 24px;
-  color: ${props => props.correct ? "#48dda7" : "red"};
+  color: ${props => (props.correct ? '#48dda7' : 'red')};
   line-height: 38px;
 
   @media (max-width: 920px) {

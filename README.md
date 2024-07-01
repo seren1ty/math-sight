@@ -1,11 +1,12 @@
 # math-sight
+
 Simple math quiz app for kids [Typescript, ReactJS, local-storage, styled-components, Material-UI, mobile responsive]
 
 https://seren1ty.github.io/math-sight
 
 WIP - Custom Modes.
 
-***
+---
 
 Mathsight contains a ReactJS/Typescript client project.
 
@@ -25,7 +26,7 @@ Open [http://localhost:3000/math-sight](http://localhost:3000/math-sight) to vie
 
 The app will reload if you make edits.
 
-***
+---
 
 Mathsight is a kids math quiz app that presents 10 questions at a time. It allows selection between Simple/Advanced
 questions via the home page, and selection of different operation types via an easy to use Select box. The operations are:
@@ -38,13 +39,13 @@ A working area is also provided so the user can type any text/numbers that might
 
 ![AC Tracker - Lap Records - Screenshot](./public/math-sight_questions_1_small.png)
 
-***
+---
 
 After completing all questions, the user can click Check Answers to see both the correct answers and their updated scores.
 
 ![AC Tracker - Login - Screenshot](./public/math-sight_answers_1_small.png)
 
-***
+---
 
 App components are rearranged on small screens for better usability.
 

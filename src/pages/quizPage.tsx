@@ -1,7 +1,7 @@
-import { Box } from '@material-ui/core';
-import LeftContainer from 'components/leftContainer.component';
-import RightContainer from 'components/rightContainer.component';
-import styled from 'styled-components';
+import { Box } from '@material-ui/core'
+import LeftContainer from 'components/leftContainer.component'
+import RightContainer from 'components/rightContainer.component'
+import styled from 'styled-components'
 
 const QuizPage = () => {
   return (
@@ -12,7 +12,7 @@ const QuizPage = () => {
   )
 }
 
-export default QuizPage;
+export default QuizPage
 
 const StyledQuizContainer = styled(Box)`
   display: flex;

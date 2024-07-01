@@ -1,15 +1,18 @@
-import { Box } from "@material-ui/core";
-import MathQuestions from "components/mathQuestions.component";
-import styled from "styled-components";
-import OperationSelect from "components/operationSelect.component";
-import React from "react";
-import { useHistory } from "react-router-dom";
-import arrow from "assets/left-arrow.png";
+import { Box } from '@material-ui/core'
+import MathQuestions from 'components/mathQuestions.component'
+import styled from 'styled-components'
+import OperationSelect from 'components/operationSelect.component'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
+import arrow from 'assets/left-arrow.png'
 
 const LeftContainer = () => {
-  const history = useHistory();
+  const history = useHistory()
 
-  const handleClickHeading = React.useCallback(() => history.push("/"), [history]);
+  const handleClickHeading = React.useCallback(
+    () => history.push('/'),
+    [history]
+  )
 
   return (
     <StyledLeftContainer>
@@ -24,14 +27,14 @@ const LeftContainer = () => {
       </Box>
       <MathQuestions />
     </StyledLeftContainer>
-  );
+  )
 }
 
-export default LeftContainer;
+export default LeftContainer
 
 const StyledLeftContainer = styled(Box)`
   @media (max-width: 920px) {
-    width: 410px
+    width: 410px;
   }
 `
 

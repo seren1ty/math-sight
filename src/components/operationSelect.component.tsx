@@ -1,18 +1,21 @@
-import { Box, MenuItem, Select } from '@material-ui/core';
-import { SessionContext } from 'context/session.context';
+import { Box, MenuItem, Select } from '@material-ui/core'
+import { SessionContext } from 'context/session.context'
 import React from 'react'
-import styled from 'styled-components';
-import { Operation } from 'types/types';
+import styled from 'styled-components'
+import { Operation } from 'types/types'
 
 const OperationSelect = () => {
-  const session = React.useContext(SessionContext);
+  const session = React.useContext(SessionContext)
 
-  const handleChangeOperationType = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
-    session?.setOperationType(e.target.value as Operation);
-  }, [session]);
+  const handleChangeOperationType = React.useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      session?.setOperationType(e.target.value as Operation)
+    },
+    [session]
+  )
 
   if (!session) {
-    return null;
+    return null
   }
 
   return (
@@ -78,4 +81,4 @@ const StyledOperationSelect = styled(Select)`
   }
 `
 
-export default OperationSelect;
+export default OperationSelect

@@ -1,27 +1,31 @@
-import { Box, MenuItem, Select } from '@material-ui/core';
-import { SessionContext } from 'context/session.context';
+import { Box, MenuItem, Select } from '@material-ui/core'
+import { SessionContext } from 'context/session.context'
 import React from 'react'
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 const AccountSelect = () => {
-  const session = React.useContext(SessionContext);
+  const session = React.useContext(SessionContext)
 
-  const handleChangeAccount = React.useCallback((e: React.ChangeEvent<{value: unknown}>) => {
-    session?.setAccountId(e.target.value as string);
-  }, [session]);
+  const handleChangeAccount = React.useCallback(
+    (e: React.ChangeEvent<{ value: unknown }>) => {
+      session?.setAccountId(e.target.value as string)
+    },
+    [session]
+  )
 
   if (!session) {
-    return null;
+    return null
   }
 
   return (
     <Box marginTop="25px">
-      <StyledAccountSelect value={session.accountId} onChange={handleChangeAccount}>
-      {
-        session.accounts.map((account) => (
+      <StyledAccountSelect
+        value={session.accountId}
+        onChange={handleChangeAccount}
+      >
+        {session.accounts.map(account => (
           <MenuItem value={account.accountId}>{account.name}</MenuItem>
-        ))
-      }
+        ))}
       </StyledAccountSelect>
     </Box>
   )
@@ -66,4 +70,4 @@ const StyledAccountSelect = styled(Select)`
   }
 `
 
-export default AccountSelect;
+export default AccountSelect
