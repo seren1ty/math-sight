@@ -2,11 +2,11 @@ import { Account, Operation, User } from 'types/types'
 import uuid from 'react-uuid'
 
 export const setMsAccounts = (accounts: Account[]): void => {
-  localStorage.setItem('mathSight-accounts', JSON.stringify(accounts))
+  localStorage.setItem('mathSight-v2-accounts', JSON.stringify(accounts))
 }
 
 export const getMsAccounts = (): Account[] => {
-  const rawAccounts = localStorage.getItem('mathSight-accounts')
+  const rawAccounts = localStorage.getItem('mathSight-v2-accounts')
 
   if (!rawAccounts) {
     setMsAccounts([])
@@ -17,11 +17,11 @@ export const getMsAccounts = (): Account[] => {
 }
 
 export const setMsAccountId = (accountId: string): void => {
-  localStorage.setItem('mathSight-accountId', JSON.stringify(accountId))
+  localStorage.setItem('mathSight-v2-accountId', JSON.stringify(accountId))
 }
 
 export const getMsAccountId = (): string => {
-  const rawAccountId = localStorage.getItem('mathSight-accountId')
+  const rawAccountId = localStorage.getItem('mathSight-v2-accountId')
 
   if (!rawAccountId) {
     // When no prior account has been setup on this computer, automatically initialise a new/default one.
@@ -42,11 +42,11 @@ export const getMsAccountId = (): string => {
 }
 
 export const setMsUsers = (accountId: string, users: User[]): void => {
-  localStorage.setItem('mathSight-users-' + accountId, JSON.stringify(users))
+  localStorage.setItem('mathSight-v2-users-' + accountId, JSON.stringify(users))
 }
 
 export const getMsUsers = (accountId: string): User[] => {
-  const rawUsers = localStorage.getItem('mathSight-users-' + accountId)
+  const rawUsers = localStorage.getItem('mathSight-v2-users-' + accountId)
 
   if (!rawUsers) {
     setMsUsers(accountId, [])
@@ -57,11 +57,11 @@ export const getMsUsers = (accountId: string): User[] => {
 }
 
 export const setMsUserId = (userId: string): void => {
-  localStorage.setItem('mathSight-userId', JSON.stringify(userId))
+  localStorage.setItem('mathSight-v2-userId', JSON.stringify(userId))
 }
 
 export const getMsUserId = (): string => {
-  const rawUserId = localStorage.getItem('mathSight-userId')
+  const rawUserId = localStorage.getItem('mathSight-v2-userId')
 
   if (!rawUserId) {
     setMsUserId('')
@@ -76,14 +76,14 @@ export const setMsOperationType = (
   operationType: Operation
 ): void => {
   localStorage.setItem(
-    'mathSight-operationType-' + userId,
+    'mathSight-v2-operationType-' + userId,
     JSON.stringify(operationType)
   )
 }
 
 export const getMsOperationType = (userId: string): Operation => {
   const rawOperationType = localStorage.getItem(
-    'mathSight-operationType-' + userId
+    'mathSight-v2-operationType-' + userId
   )
 
   if (!rawOperationType) {
@@ -98,13 +98,13 @@ export const getMsOperationType = (userId: string): Operation => {
 
 export const setMsHighScore = (userId: string, highScore: number): void => {
   localStorage.setItem(
-    'mathSight-highScore-' + userId,
+    'mathSight-v2-highScore-' + userId,
     JSON.stringify(highScore)
   )
 }
 
 export const getMsHighScore = (userId: string): number => {
-  const rawHighScore = localStorage.getItem('mathSight-highScore-' + userId)
+  const rawHighScore = localStorage.getItem('mathSight-v2-highScore-' + userId)
 
   if (!rawHighScore) {
     if (userId) {
@@ -121,14 +121,14 @@ export const setMsCurrentScore = (
   currentScore: number
 ): void => {
   localStorage.setItem(
-    'mathSight-currentScore-' + userId,
+    'mathSight-v2-currentScore-' + userId,
     JSON.stringify(currentScore)
   )
 }
 
 export const getMsCurrentScore = (userId: string): number => {
   const rawCurrentScore = localStorage.getItem(
-    'mathSight-currentScore-' + userId
+    'mathSight-v2-currentScore-' + userId
   )
 
   if (!rawCurrentScore) {
