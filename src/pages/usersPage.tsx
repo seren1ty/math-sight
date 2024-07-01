@@ -163,13 +163,15 @@ const UsersPage = () => {
                 <StyledName onClick={() => selectCustomUser(user)}>
                   Custom
                 </StyledName>
-                <Link
-                  component="button"
-                  variant="body2"
-                  onClick={() => toggleEditMode()}
-                >
-                  {editMode ? 'Collapse' : 'Expand'}
-                </Link>
+                <StyledLinkContainer>
+                  <Link
+                    component="button"
+                    variant="body2"
+                    onClick={() => toggleEditMode()}
+                  >
+                    {editMode ? 'Collapse' : 'Expand'}
+                  </Link>
+                </StyledLinkContainer>
               </StyledNameContainer>
               {editMode ? (
                 <StyledCustomInputContainers>
@@ -178,6 +180,7 @@ const UsersPage = () => {
                     <StyledCustomInput
                       value={customAS}
                       onChange={handleOnChangeAS}
+                      maxLength={6}
                     />
                   </StyledCustomInputContainer>
                   <StyledCustomInputContainer>
@@ -185,6 +188,7 @@ const UsersPage = () => {
                     <StyledCustomInput
                       value={customM}
                       onChange={handleOnChangeM}
+                      maxLength={6}
                     />
                   </StyledCustomInputContainer>
                   <StyledCustomInputContainer>
@@ -192,6 +196,7 @@ const UsersPage = () => {
                     <StyledCustomInput
                       value={customD}
                       onChange={handleOnChangeD}
+                      maxLength={6}
                     />
                   </StyledCustomInputContainer>
                 </StyledCustomInputContainers>
@@ -292,6 +297,7 @@ const StyledCustomUser = styled(Box)`
 `
 
 const StyledNameContainer = styled.span`
+  flex-grow: 1;
   display: flex;
   justify-content: space-between;
 `
@@ -330,6 +336,13 @@ const StyledName = styled(Box)`
   font-size: 30px;
   font-weight: 600;
   color: #7d9ded;
+`
+
+const StyledLinkContainer = styled(Box)`
+  width: 60px;
+  padding-top: 10px;
+  display: flex;
+  align-items: flex-start;
 `
 
 const StyledScores = styled(Box)`
